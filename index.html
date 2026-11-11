@@ -88,6 +88,7 @@ p,li,td,th{font-size:calc(var(--u)*1.7);line-height:1.45}
 .hero .kapitel-liste a{border:2px solid var(--tinte);border-top-width:2px;background:rgba(255,255,255,.28);padding:calc(var(--u)*1.2) calc(var(--u)*1.6);height:100%;transition:background .2s,color .2s}
 .hero .kapitel-liste a:hover{background:var(--tinte);color:var(--zoll)}
 .hero .kapitel-liste .hinweis{align-self:end}
+.hero .kapitel-liste .kurz-link{border:0;background:var(--tinte);color:var(--zoll);padding:.5em .8em;height:auto;margin-bottom:.6em;font-size:calc(var(--u)*1.2);display:inline-block}
 .marke{font-family:var(--display);font-weight:800;font-stretch:125%;font-size:calc(var(--u)*2.6);letter-spacing:.01em}
 .marke span{color:var(--signal)}
 .hinweis{font-family:var(--mono);font-size:calc(var(--u)*1.15);color:#5a4600;text-align:right;line-height:1.7}
@@ -345,8 +346,12 @@ kbd{font-family:var(--mono);border:1px solid currentColor;border-radius:3px;padd
 /* ---------- Finale: Geldregen + morphender Blob ---------- */
 .finale{overflow:hidden;align-items:center;text-align:center;isolation:isolate}
 .finale-inhalt{position:relative;z-index:3;display:flex;flex-direction:column;align-items:center;gap:calc(var(--u)*1.6)}
-.finale-inhalt .logo{width:calc(var(--u)*9);filter:drop-shadow(6px 6px 0 var(--tinte))}
-.finale h1{font-size:calc(var(--u)*7.2);font-weight:900;font-stretch:125%;line-height:.95;color:var(--zoll);text-shadow:7px 7px 0 var(--tinte)}
+.szene{width:min(100%,calc(var(--u)*100));height:auto;overflow:visible}
+.szene .name-figur{font-family:var(--mono);font-size:16px;fill:#9aa2ad;text-transform:uppercase;letter-spacing:.1em}
+.szene .schein-text{font-family:var(--display);font-weight:900;font-size:19px;fill:var(--tinte)}
+.szene .arm{transform-box:view-box;transform-origin:150px 168px;transform:rotate(20deg)}
+.szene .flug{opacity:0}
+.finale h1{font-size:calc(var(--u)*6);font-weight:900;font-stretch:125%;line-height:.95;color:var(--zoll);text-shadow:7px 7px 0 var(--tinte)}
 .unterzeile{font-size:calc(var(--u)*2.3);color:#fff;font-weight:500}
 .unterzeile b{font-family:var(--display);font-weight:800;text-transform:uppercase;font-stretch:112%}
 .chips.hell span{border-color:#fff;color:#fff;background:rgba(20,21,24,.35)}
@@ -408,7 +413,7 @@ kbd{font-family:var(--mono);border:1px solid currentColor;border-radius:3px;padd
     <li><a href="#k1"><b>1</b>Die Idee</a></li>
     <li><a href="#k2"><b>2</b>Canvas &amp; USP</a></li>
     <li><a href="#k3"><b>3</b>Erlösmodell</a></li>
-    <li class="hinweis">Scrollen ↓<br><kbd>T</kbd> Timer · <kbd>F</kbd> Vollbild</li>
+    <li class="hinweis"><a class="kurz-link" href="kurz/">Kurzfassung: 3 Folien →</a>Scrollen ↓ · <kbd>T</kbd> Timer · <kbd>F</kbd> Vollbild</li>
   </ol>
 </section>
 
@@ -633,13 +638,34 @@ kbd{font-family:var(--mono);border:1px solid currentColor;border-radius:3px;padd
 </section>
 
 <section class="slide nacht finale" aria-label="Finale">
-  <div class="deko euro-bg" aria-hidden="true">€</div>
-  <div class="deko blob" aria-hidden="true"></div>
-  <div class="deko regen" id="regen" aria-hidden="true"></div>
   <div class="finale-inhalt">
-    <div class="logo-slot"></div>
-    <h1>Thomas gibt<br>50 € Startkapital</h1>
-    <p class="unterzeile">Der Rest kommt Monat für Monat. Mit <b>Unkelstrothega Interfaces</b>.</p>
+    <svg class="szene" id="szene" viewBox="0 0 900 320" role="img" aria-label="Ein Strichmännchen wirft einen 50-Euro-Schein, der sich in unser Logo verwandelt">
+      <line x1="40" x2="860" y1="300" y2="300" stroke="#3b3f46" stroke-width="3" stroke-dasharray="10 8"/>
+      <g class="figur" stroke="#E9E9E5" stroke-width="14" stroke-linecap="round" fill="none">
+        <circle cx="150" cy="116" r="22" fill="#E9E9E5" stroke="none"/>
+        <line x1="150" y1="150" x2="150" y2="228"/>
+        <line x1="150" y1="228" x2="118" y2="294"/>
+        <line x1="150" y1="228" x2="182" y2="294"/>
+        <line x1="150" y1="168" x2="114" y2="208"/>
+        <line class="arm" x1="150" y1="168" x2="208" y2="168"/>
+      </g>
+      <text x="150" y="70" text-anchor="middle" class="name-figur">Thomas</text>
+      <g class="flug"><g class="dreh">
+        <rect x="-36" y="-19" width="72" height="38" rx="4" fill="#F4C21B" stroke="#141518" stroke-width="3"/>
+        <text x="0" y="7" text-anchor="middle" class="schein-text">50 €</text>
+      </g></g>
+      <g transform="translate(640 86) scale(.95)">
+        <circle class="ring" cx="112" cy="100" r="96" fill="none" stroke="#F4C21B" stroke-width="6" opacity="0"/>
+        <g class="morph-gruppe" opacity="0">
+          <path class="morph" d="M18 70h40v0h48V70h40v62H18z" fill="#F4C21B" stroke="#141518" stroke-width="4">
+            <animate id="morph" attributeName="d" begin="indefinite" dur="0.8s" fill="freeze" calcMode="spline" keyTimes="0;1" keySplines=".3 0 .2 1"
+              from="M18 70h40v0h48V70h40v62H18z" to="M18 14h40v122h48V14h40v162H18z"/>
+          </path>
+          <text class="morph-text schein-text" x="82" y="108" text-anchor="middle">50 €</text>
+        </g>
+        <g class="voll" opacity="0"><svg class="logo-slot-voll" x="0" y="0" width="224" height="192"></svg></g>
+      </g>
+    </svg>
     <span class="chips hell"><span>Julian</span><span>Niels</span><span>Sandro</span></span>
     <p class="klein">Fiktives Uniprojekt · Modul Digitale Business Modelle</p>
   </div>
@@ -674,6 +700,8 @@ kbd{font-family:var(--mono);border:1px solid currentColor;border-radius:3px;padd
     </svg>`;
   };
   document.querySelectorAll('.logo-slot').forEach(s => s.outerHTML = logo());
+  document.querySelectorAll('.logo-slot-voll').forEach(s =>
+    s.outerHTML = logo().replace('<svg class="logo"', '<svg class="logo-voll" x="0" y="0" width="224" height="192"'));
 
   const slides = [...document.querySelectorAll('.slide')];
   const N = slides.length, CM = 20; // jeder Abschnitt = ein Zollstock-Glied à 20 cm
@@ -852,6 +880,59 @@ kbd{font-family:var(--mono);border:1px solid currentColor;border-radius:3px;padd
   function onEnter(s) {
     if (s.querySelector('#term')) terminal();
     if (s.querySelector('#chart')) chart(true);
+    if (s.querySelector('#szene')) wurf();
+  }
+
+  // Finale: Thomas wirft 50 €, der Schein fliegt im Bogen und morpht zum Logo
+  function wurf() {
+    const sz = document.getElementById('szene');
+    const arm = sz.querySelector('.arm'), flug = sz.querySelector('.flug'), dreh = sz.querySelector('.dreh');
+    const mg = sz.querySelector('.morph-gruppe'), mt = sz.querySelector('.morph-text'), voll = sz.querySelector('.voll');
+    const ring = sz.querySelector('.ring'), morph = document.getElementById('morph');
+    const endzustand = () => { mg.setAttribute('opacity', 0); voll.setAttribute('opacity', 1); flug.style.opacity = 0; };
+    if (ruhig) { endzustand(); return; }
+    // Startzustand (vorherige Durchläufe zurücksetzen)
+    [arm, voll, mt, ring].forEach(el => el.getAnimations().forEach(a => a.cancel()));
+    ring.style.transformBox = 'fill-box'; ring.style.transformOrigin = 'center';
+    mg.setAttribute('opacity', 0); voll.setAttribute('opacity', 0); mt.setAttribute('opacity', 1);
+    sz.querySelector('.morph').setAttribute('d', 'M18 70h40v0h48V70h40v62H18z');
+    flug.style.opacity = 0;
+    // Ausholen und werfen
+    arm.animate([
+      { transform: 'rotate(20deg)' }, { transform: 'rotate(160deg)', offset: .3 },
+      { transform: 'rotate(215deg)', offset: .55 }, { transform: 'rotate(-35deg)', offset: .8 }, { transform: 'rotate(15deg)' }
+    ], { duration: 1300, easing: 'ease-in-out', fill: 'forwards' });
+    // Flugbahn: quadratische Kurve von der Hand zum Logo
+    const P0 = [197, 135], P1 = [440, -70], P2 = [718, 184], dauer = 950;
+    setTimeout(() => {
+      const t0 = performance.now();
+      flug.style.opacity = 1;
+      const schritt = now => {
+        const t = Math.min(1, (now - t0) / dauer), u = 1 - t;
+        const x = u * u * P0[0] + 2 * u * t * P1[0] + t * t * P2[0];
+        const y = u * u * P0[1] + 2 * u * t * P1[1] + t * t * P2[1];
+        const s = 1 + Math.sin(t * Math.PI) * .35;
+        flug.setAttribute('transform', `translate(${x} ${y}) scale(${s})`);
+        dreh.setAttribute('transform', `rotate(${t * 720})`);
+        if (t < 1) requestAnimationFrame(schritt); else ankunft();
+      };
+      requestAnimationFrame(schritt);
+    }, 1040);
+    // Ankunft: Ring, dann Schein → U (Pfad-Morph), danach das volle Logo
+    function ankunft() {
+      flug.style.opacity = 0;
+      mg.setAttribute('opacity', 1);
+      ring.animate([{ opacity: 1, transform: 'scale(.3)' }, { opacity: 0, transform: 'scale(1.5)' }],
+        { duration: 700, easing: 'ease-out' });
+      mt.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 300, fill: 'forwards' });
+      morph.beginElement();
+      setTimeout(() => {
+        voll.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 500, fill: 'forwards' });
+        setTimeout(() => { voll.setAttribute('opacity', 1); mg.setAttribute('opacity', 0); }, 520);
+      }, 850);
+    }
+    clearTimeout(wurf.t);
+    wurf.t = setTimeout(wurf, 8000);
   }
 
   // Geldregen fürs Finale: Scheine und Münzen fliegen nach oben
