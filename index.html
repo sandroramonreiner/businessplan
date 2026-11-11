@@ -88,7 +88,13 @@ p,li,td,th{font-size:calc(var(--u)*1.7);line-height:1.45}
 .hero .kapitel-liste a{border:2px solid var(--tinte);border-top-width:2px;background:rgba(255,255,255,.28);padding:calc(var(--u)*1.2) calc(var(--u)*1.6);height:100%;transition:background .2s,color .2s}
 .hero .kapitel-liste a:hover{background:var(--tinte);color:var(--zoll)}
 .hero .kapitel-liste .hinweis{align-self:end}
-.hero .kapitel-liste .kurz-link{border:0;background:var(--tinte);color:var(--zoll);padding:.5em .8em;height:auto;margin-bottom:.6em;font-size:calc(var(--u)*1.2);display:inline-block}
+.hero .kapitel-liste .kurz-link{border:3px solid var(--tinte);background:var(--signal);color:#fff;padding:.6em 1.1em;height:auto;margin-bottom:.8em;
+  font-family:var(--display);font-weight:900;font-stretch:112%;font-size:calc(var(--u)*1.9);text-transform:uppercase;display:inline-block;
+  box-shadow:6px 6px 0 var(--tinte);transform-origin:center;
+  animation:zoomrein .9s 1.2s cubic-bezier(.2,1.7,.4,1) backwards,puls 1.6s 2.3s ease-in-out 5}
+.hero .kapitel-liste .kurz-link:hover{background:var(--tinte);color:var(--zoll);animation:none}
+@keyframes zoomrein{from{transform:scale(0) rotate(-8deg);opacity:0}}
+@keyframes puls{50%{transform:scale(1.09);box-shadow:10px 10px 0 var(--tinte)}}
 .marke{font-family:var(--display);font-weight:800;font-stretch:125%;font-size:calc(var(--u)*2.6);letter-spacing:.01em}
 .marke span{color:var(--signal)}
 .hinweis{font-family:var(--mono);font-size:calc(var(--u)*1.15);color:#5a4600;text-align:right;line-height:1.7}
@@ -139,10 +145,10 @@ kbd{font-family:var(--mono);border:1px solid currentColor;border-radius:3px;padd
 
 /* ---------- Business Model Canvas ---------- */
 .bmc{display:grid;grid-template-columns:repeat(10,1fr);grid-template-rows:auto auto auto;gap:0;padding:3px}
-.feld{background:var(--putz);padding:calc(var(--u)*1.4);min-height:calc(var(--u)*10);box-shadow:0 0 0 3px var(--tinte)}
+.feld{background:var(--putz);padding:calc(var(--u)*1.3);min-height:calc(var(--u)*13);box-shadow:0 0 0 3px var(--tinte)}
 .feld h3{font-family:var(--mono);font-size:calc(var(--u)*1.1);text-transform:uppercase;letter-spacing:.05em;color:var(--stahl);margin-bottom:.6em;font-weight:600}
 .feld ul{list-style:none;display:grid;gap:.3em}
-.feld li{font-size:calc(var(--u)*1.6);line-height:1.35}
+.feld li{font-size:calc(var(--u)*1.4);line-height:1.35}
 .feld li b{font-weight:700}
 .f-kp{grid-column:1/3;grid-row:1/3}
 .f-ka{grid-column:3/5;grid-row:1}
@@ -345,10 +351,11 @@ kbd{font-family:var(--mono);border:1px solid currentColor;border-radius:3px;padd
 
 /* ---------- Finale: Geldregen + morphender Blob ---------- */
 .finale{overflow:hidden;align-items:center;text-align:center;isolation:isolate}
-.finale-inhalt{position:relative;z-index:3;display:flex;flex-direction:column;align-items:center;gap:calc(var(--u)*1.6)}
-.szene{width:min(100%,calc(var(--u)*100));height:auto;overflow:visible}
-.szene .name-figur{font-family:var(--mono);font-size:16px;fill:#9aa2ad;text-transform:uppercase;letter-spacing:.1em}
-.szene .schein-text{font-family:var(--display);font-weight:900;font-size:19px;fill:var(--tinte)}
+.finale-inhalt{position:relative;z-index:3;width:100%;display:flex;flex-direction:column;align-items:center;gap:calc(var(--u)*1.6)}
+.szene{width:100%;max-height:72vh;height:auto;overflow:visible}
+.szene .name-figur{font-family:var(--mono);font-size:18px;fill:#9aa2ad;text-transform:uppercase;letter-spacing:.1em}
+.szene .schein-text{font-family:var(--display);font-weight:900;font-size:26px;fill:var(--tinte)}
+.szene .morph-text{font-size:30px}
 .szene .arm{transform-box:view-box;transform-origin:150px 168px;transform:rotate(20deg)}
 .szene .flug{opacity:0}
 .finale h1{font-size:calc(var(--u)*6);font-weight:900;font-stretch:125%;line-height:.95;color:var(--zoll);text-shadow:7px 7px 0 var(--tinte)}
@@ -413,7 +420,7 @@ kbd{font-family:var(--mono);border:1px solid currentColor;border-radius:3px;padd
     <li><a href="#k1"><b>1</b>Die Idee</a></li>
     <li><a href="#k2"><b>2</b>Canvas &amp; USP</a></li>
     <li><a href="#k3"><b>3</b>Erlösmodell</a></li>
-    <li class="hinweis"><a class="kurz-link" href="kurz/">Kurzfassung: 3 Folien →</a>Scrollen ↓ · <kbd>T</kbd> Timer · <kbd>F</kbd> Vollbild</li>
+    <li class="hinweis"><a class="kurz-link" href="kurz/">Kurzfassung · 3 Folien →</a><br>Scrollen ↓ · <kbd>T</kbd> Timer · <kbd>F</kbd> Vollbild</li>
   </ol>
 </section>
 
@@ -478,15 +485,15 @@ kbd{font-family:var(--mono);border:1px solid currentColor;border-radius:3px;padd
   <div class="mass"><span>Business Model Canvas</span></div>
   <h2>Das ganze Modell auf einer Seite.</h2>
   <div class="bmc">
-    <div class="feld f-kp"><h3>Schlüsselpartner</h3><ul><li>Cloudflare, GitHub</li><li>KI-Anbieter</li><li>Innungen</li></ul></div>
-    <div class="feld f-ka"><h3>Schlüsselaktivitäten</h3><ul><li>Vertrieb vor Ort</li><li>KI-Entwicklung</li><li>Betreuung</li></ul></div>
-    <div class="feld f-kr"><h3>Schlüsselressourcen</h3><ul><li>Team</li><li>Infrastruktur-Know-how</li></ul></div>
-    <div class="feld f-vp"><h3>Wertangebot</h3><ul><li><b>Website &amp; CRM zur Miete</b></li><li>Fertig eingerichtet</li><li>DSGVO-konform</li></ul></div>
-    <div class="feld f-cr"><h3>Kundenbeziehung</h3><ul><li>Persönlich</li><li>Dauerhafte Betreuung</li></ul></div>
-    <div class="feld f-ch"><h3>Kanäle</h3><ul><li>Direkt im Betrieb</li><li>Empfehlungen</li></ul></div>
-    <div class="feld f-cs"><h3>Kundensegmente</h3><ul><li><b>Handwerksbetriebe in OWL</b></li><li>Danach: Kleinbetriebe jeder Branche</li></ul></div>
-    <div class="feld f-c"><h3>Kostenstruktur</h3><ul><li>Technik ~140 €/Monat</li><li>Gewinnbeteiligung statt Fixgehälter</li></ul></div>
-    <div class="feld f-r"><h3>Einnahmequellen</h3><ul><li><b>Monatsmiete</b> (Kern)</li><li>Einrichtung, Workshops</li></ul></div>
+    <div class="feld f-kp"><h3>Schlüsselpartner</h3><ul><li><b>Cloudflare</b>: Hosting, Speicherung in der EU</li><li><b>GitHub</b>: Code &amp; Versionen</li><li><b>KI-Anbieter</b>: Claude Code, Codex</li><li>Innungen &amp; Handwerkskammer</li><li>Großhändler</li><li>Steuerberater</li></ul></div>
+    <div class="feld f-ka"><h3>Schlüsselaktivitäten</h3><ul><li>Vertrieb vor Ort</li><li>KI-gestützte Entwicklung</li><li>Betrieb, Wartung, Updates</li><li>Workshops</li></ul></div>
+    <div class="feld f-kr"><h3>Schlüsselressourcen</h3><ul><li>Team: Vertrieb + Technik</li><li>Know-how Cloudflare &amp; GitHub</li><li>Bausteine, die wir wiederverwenden</li><li>Referenzkunden</li></ul></div>
+    <div class="feld f-vp"><h3>Wertangebot</h3><ul><li><b>Website &amp; CRM zur Miete</b></li><li>Fertig eingerichtet, nichts selbst machen</li><li>20–30 % unter Marktpreis</li><li>DSGVO-konform, Daten in der EU</li><li>Persönliche Betreuung</li></ul></div>
+    <div class="feld f-cr"><h3>Kundenbeziehung</h3><ul><li>Persönlich, fester Ansprechpartner</li><li>Änderungen per WhatsApp</li><li>Laufende Betreuung statt Einmalprojekt</li></ul></div>
+    <div class="feld f-ch"><h3>Kanäle</h3><ul><li>Direkt im Betrieb</li><li>Großhandel, Innungen</li><li>Empfehlungen</li><li>Eigene Website</li></ul></div>
+    <div class="feld f-cs"><h3>Kundensegmente</h3><ul><li><b>Start: inhabergeführte Handwerksbetriebe in OWL</b></li><li>Danach: Friseure, Imbiss, Kleinbetriebe jeder Branche</li><li>Workshops: technikaffine Selbstständige &amp; Teams</li></ul></div>
+    <div class="feld f-c"><h3>Kostenstruktur</h3><ul><li>Technik ~140 €/Monat: KI-Tools 20–40 € pro Kopf, Cloudflare-Teamaccount ~20 €, GitHub gratis</li><li>Fahrten, Telefon, Versicherung, Steuerberater: ~1.100 €/Monat fix</li><li>Keine Fixgehälter: Gewinnbeteiligung</li></ul></div>
+    <div class="feld f-r"><h3>Einnahmequellen</h3><ul><li><b>Monatsmiete (Kern)</b>: Ø 163 € pro Kunde</li><li>Einrichtung: Ø 960 € einmalig</li><li>Workshops: 290 € pro Person</li><li>Individuelle Projekte</li></ul></div>
   </div>
 </section>
 
@@ -639,7 +646,7 @@ kbd{font-family:var(--mono);border:1px solid currentColor;border-radius:3px;padd
 
 <section class="slide nacht finale" aria-label="Finale">
   <div class="finale-inhalt">
-    <svg class="szene" id="szene" viewBox="0 0 900 320" role="img" aria-label="Ein Strichmännchen wirft einen 50-Euro-Schein, der sich in unser Logo verwandelt">
+    <svg class="szene" id="szene" viewBox="70 10 800 300" role="img" aria-label="Ein Strichmännchen wirft einen 50-Euro-Schein, der sich in unser Logo verwandelt">
       <line x1="40" x2="860" y1="300" y2="300" stroke="#3b3f46" stroke-width="3" stroke-dasharray="10 8"/>
       <g class="figur" stroke="#E9E9E5" stroke-width="14" stroke-linecap="round" fill="none">
         <circle cx="150" cy="116" r="22" fill="#E9E9E5" stroke="none"/>
@@ -651,14 +658,15 @@ kbd{font-family:var(--mono);border:1px solid currentColor;border-radius:3px;padd
       </g>
       <text x="150" y="70" text-anchor="middle" class="name-figur">Thomas</text>
       <g class="flug"><g class="dreh">
-        <rect x="-36" y="-19" width="72" height="38" rx="4" fill="#F4C21B" stroke="#141518" stroke-width="3"/>
-        <text x="0" y="7" text-anchor="middle" class="schein-text">50 €</text>
+        <rect x="-52" y="-27" width="104" height="54" rx="5" fill="#F4C21B" stroke="#141518" stroke-width="3.5"/>
+        <rect x="-44" y="-19" width="88" height="38" rx="3" fill="none" stroke="#141518" stroke-width="1.5" stroke-dasharray="3 3"/>
+        <text x="0" y="9" text-anchor="middle" class="schein-text">50 €</text>
       </g></g>
       <g transform="translate(640 86) scale(.95)">
         <circle class="ring" cx="112" cy="100" r="96" fill="none" stroke="#F4C21B" stroke-width="6" opacity="0"/>
         <g class="morph-gruppe" opacity="0">
           <path class="morph" d="M18 70h40v0h48V70h40v62H18z" fill="#F4C21B" stroke="#141518" stroke-width="4">
-            <animate id="morph" attributeName="d" begin="indefinite" dur="0.8s" fill="freeze" calcMode="spline" keyTimes="0;1" keySplines=".3 0 .2 1"
+            <animate id="morph" attributeName="d" begin="indefinite" dur="1.3s" fill="freeze" calcMode="spline" keyTimes="0;1" keySplines=".3 0 .2 1"
               from="M18 70h40v0h48V70h40v62H18z" to="M18 14h40v122h48V14h40v162H18z"/>
           </path>
           <text class="morph-text schein-text" x="82" y="108" text-anchor="middle">50 €</text>
@@ -901,9 +909,9 @@ kbd{font-family:var(--mono);border:1px solid currentColor;border-radius:3px;padd
     arm.animate([
       { transform: 'rotate(20deg)' }, { transform: 'rotate(160deg)', offset: .3 },
       { transform: 'rotate(215deg)', offset: .55 }, { transform: 'rotate(-35deg)', offset: .8 }, { transform: 'rotate(15deg)' }
-    ], { duration: 1300, easing: 'ease-in-out', fill: 'forwards' });
+    ], { duration: 2100, easing: 'ease-in-out', fill: 'forwards' });
     // Flugbahn: quadratische Kurve von der Hand zum Logo
-    const P0 = [197, 135], P1 = [440, -70], P2 = [718, 184], dauer = 950;
+    const P0 = [197, 135], P1 = [440, -70], P2 = [718, 184], dauer = 1700;
     setTimeout(() => {
       const t0 = performance.now();
       flug.style.opacity = 1;
@@ -917,7 +925,7 @@ kbd{font-family:var(--mono);border:1px solid currentColor;border-radius:3px;padd
         if (t < 1) requestAnimationFrame(schritt); else ankunft();
       };
       requestAnimationFrame(schritt);
-    }, 1040);
+    }, 1680);
     // Ankunft: Ring, dann Schein → U (Pfad-Morph), danach das volle Logo
     function ankunft() {
       flug.style.opacity = 0;
@@ -929,10 +937,10 @@ kbd{font-family:var(--mono);border:1px solid currentColor;border-radius:3px;padd
       setTimeout(() => {
         voll.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 500, fill: 'forwards' });
         setTimeout(() => { voll.setAttribute('opacity', 1); mg.setAttribute('opacity', 0); }, 520);
-      }, 850);
+      }, 1450);
     }
     clearTimeout(wurf.t);
-    wurf.t = setTimeout(wurf, 8000);
+    wurf.t = setTimeout(wurf, 12000);
   }
 
   // Geldregen fürs Finale: Scheine und Münzen fliegen nach oben
@@ -953,6 +961,8 @@ kbd{font-family:var(--mono);border:1px solid currentColor;border-radius:3px;padd
 
   sichtbar(); fortschritt();
   setTimeout(sichtbar, 300);
+  // Sicherheitsnetz, falls Scroll-Ereignisse gedrosselt werden (z. B. Beamer-Vorschau)
+  setInterval(() => { sichtbar(); fortschritt(); }, 500);
 })();
 </script>
 </body>
