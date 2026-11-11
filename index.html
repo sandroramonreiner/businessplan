@@ -88,13 +88,17 @@ p,li,td,th{font-size:calc(var(--u)*1.7);line-height:1.45}
 .hero .kapitel-liste a{border:2px solid var(--tinte);border-top-width:2px;background:rgba(255,255,255,.28);padding:calc(var(--u)*1.2) calc(var(--u)*1.6);height:100%;transition:background .2s,color .2s}
 .hero .kapitel-liste a:hover{background:var(--tinte);color:var(--zoll)}
 .hero .kapitel-liste .hinweis{align-self:end}
-.hero .kapitel-liste .kurz-link{border:3px solid var(--tinte);background:var(--signal);color:#fff;padding:.6em 1.1em;height:auto;margin-bottom:.8em;
-  font-family:var(--display);font-weight:900;font-stretch:112%;font-size:calc(var(--u)*1.9);text-transform:uppercase;display:inline-block;
-  box-shadow:6px 6px 0 var(--tinte);transform-origin:center;
-  animation:zoomrein .9s 1.2s cubic-bezier(.2,1.7,.4,1) backwards,puls 1.6s 2.3s ease-in-out 5}
-.hero .kapitel-liste .kurz-link:hover{background:var(--tinte);color:var(--zoll);animation:none}
+/* Der Link selbst bleibt fest stehen (stabile Klickfläche), animiert wird nur das Innere */
+.hero .kapitel-liste .kurz-link{border:0;background:none;padding:0;height:auto;margin-bottom:.8em;display:inline-block;cursor:pointer}
+.hero .kapitel-liste .kurz-link:hover{background:none;color:inherit}
+.kurz-inner{display:inline-block;border:3px solid var(--tinte);background:var(--signal);color:#fff;padding:.6em 1.1em;
+  font-family:var(--display);font-weight:900;font-stretch:112%;font-size:calc(var(--u)*1.9);text-transform:uppercase;
+  box-shadow:6px 6px 0 var(--tinte);transform-origin:center;pointer-events:none;
+  animation:zoomrein .9s 1.2s cubic-bezier(.2,1.7,.4,1) backwards,puls 1.8s 2.3s ease-in-out 3;
+  transition:background .2s,color .2s}
+.kurz-link:hover .kurz-inner,.kurz-link:focus-visible .kurz-inner{background:var(--tinte);color:var(--zoll);animation-play-state:paused}
 @keyframes zoomrein{from{transform:scale(0) rotate(-8deg);opacity:0}}
-@keyframes puls{50%{transform:scale(1.09);box-shadow:10px 10px 0 var(--tinte)}}
+@keyframes puls{50%{transform:scale(1.05)}}
 .marke{font-family:var(--display);font-weight:800;font-stretch:125%;font-size:calc(var(--u)*2.6);letter-spacing:.01em}
 .marke span{color:var(--signal)}
 .hinweis{font-family:var(--mono);font-size:calc(var(--u)*1.15);color:#5a4600;text-align:right;line-height:1.7}
@@ -420,7 +424,7 @@ kbd{font-family:var(--mono);border:1px solid currentColor;border-radius:3px;padd
     <li><a href="#k1"><b>1</b>Die Idee</a></li>
     <li><a href="#k2"><b>2</b>Canvas &amp; USP</a></li>
     <li><a href="#k3"><b>3</b>Erlösmodell</a></li>
-    <li class="hinweis"><a class="kurz-link" href="kurz/">Kurzfassung · 3 Folien →</a><br>Scrollen ↓ · <kbd>T</kbd> Timer · <kbd>F</kbd> Vollbild</li>
+    <li class="hinweis"><a class="kurz-link" href="kurz/"><span class="kurz-inner">Kurzfassung · 3 Folien →</span></a><br>Scrollen ↓ · <kbd>T</kbd> Timer · <kbd>F</kbd> Vollbild</li>
   </ol>
 </section>
 
