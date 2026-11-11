@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Hanken+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 224 192'%3E%3Cpath d='M18 14h40v122h48V14h40v162H18z' fill='%23F4C21B' stroke='%23141518' stroke-width='8'/%3E%3Crect x='168' y='14' width='40' height='162' fill='%23F4C21B' stroke='%23141518' stroke-width='8'/%3E%3C/svg%3E">
 <script>document.documentElement.classList.add('js')</script>
 <style>
 :root{
@@ -60,15 +61,38 @@ p,li,td,th{font-size:calc(var(--u)*1.7);line-height:1.45}
 .js .rv{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .8s cubic-bezier(.2,.8,.2,1);transition-delay:var(--d,0s)}
 .js .rv.in{opacity:1;transform:none}
 
+/* ---------- Logo: Zollstock-Glieder bilden „UI“ ---------- */
+.logo{display:block;overflow:visible}
+.logo g{transform-box:fill-box}
+.logo .g-l,.logo .g-r,.logo .g-i{transform-origin:50% 100%;animation:klappY .7s cubic-bezier(.2,.9,.25,1.15) backwards}
+.logo .g-b{transform-origin:0 50%;animation:klappX .6s cubic-bezier(.2,.9,.25,1.15) backwards}
+.logo .g-l{animation-delay:.25s}.logo .g-b{animation-delay:.6s}.logo .g-r{animation-delay:.9s}.logo .g-i{animation-delay:1.2s}
+.logo .niet{animation:pop .4s 1.6s backwards}
+@keyframes klappY{from{transform:scaleY(0)}}
+@keyframes klappX{from{transform:scaleX(0)}}
+@keyframes pop{from{opacity:0}}
+.wortmarke{text-align:center}
+.wortmarke b{display:block;font-family:var(--display);font-weight:900;font-stretch:125%;font-size:calc(var(--u)*3.3);line-height:1;text-transform:uppercase;letter-spacing:-.01em}
+.wortmarke span{display:block;font-family:var(--mono);font-size:calc(var(--u)*1.35);text-transform:uppercase;letter-spacing:.62em;margin-top:.5em;padding-left:.62em}
+
 /* ---------- Hero ---------- */
-.hero{justify-content:space-between}
-.hero h1{max-width:17ch;font-size:calc(var(--u)*7.8)}
-.hero .unten{display:flex;justify-content:space-between;align-items:flex-end;gap:2em}
+.hero{justify-content:space-between;gap:calc(var(--u)*2);padding-top:calc(var(--u)*4);padding-bottom:calc(var(--u)*4)}
+.hero h1{max-width:16ch;font-size:calc(var(--u)*5.3);margin-top:calc(var(--u)*1.6)}
+.kopf{display:flex;justify-content:space-between;align-items:center;gap:1em;flex-wrap:wrap}
+.chips{display:flex;gap:.5em;flex-wrap:wrap}
+.chips span{border:2px solid var(--tinte);border-radius:99px;padding:.2em .9em;font-family:var(--display);font-weight:800;font-size:calc(var(--u)*1.6);text-transform:uppercase}
+.hero-mitte{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:calc(var(--u)*5);align-items:center}
+.logo-gross{display:flex;flex-direction:column;align-items:center;gap:calc(var(--u)*2)}
+.logo-gross .logo{width:min(100%,calc(var(--u)*24));filter:drop-shadow(10px 10px 0 var(--tinte))}
+.hero .kapitel-liste{display:grid;grid-template-columns:repeat(3,minmax(0,1fr)) auto;gap:calc(var(--u)*1.6);margin:0;align-items:stretch}
+.hero .kapitel-liste a{border:2px solid var(--tinte);border-top-width:2px;background:rgba(255,255,255,.28);padding:calc(var(--u)*1.2) calc(var(--u)*1.6);height:100%;transition:background .2s,color .2s}
+.hero .kapitel-liste a:hover{background:var(--tinte);color:var(--zoll)}
+.hero .kapitel-liste .hinweis{align-self:end}
 .marke{font-family:var(--display);font-weight:800;font-stretch:125%;font-size:calc(var(--u)*2.6);letter-spacing:.01em}
 .marke span{color:var(--signal)}
 .hinweis{font-family:var(--mono);font-size:calc(var(--u)*1.15);color:#5a4600;text-align:right;line-height:1.7}
 kbd{font-family:var(--mono);border:1px solid currentColor;border-radius:3px;padding:0 .35em}
-.fiktiv{align-self:flex-start;background:var(--tinte);color:var(--zoll);font-family:var(--mono);font-size:calc(var(--u)*1.2);text-transform:uppercase;letter-spacing:.06em;padding:.45em .9em;margin-bottom:calc(var(--u)*2)}
+.fiktiv{background:var(--tinte);color:var(--zoll);font-family:var(--mono);font-size:calc(var(--u)*1.15);text-transform:uppercase;letter-spacing:.06em;padding:.45em .9em}
 .namen{font-family:var(--display);font-weight:800;font-size:calc(var(--u)*2.2);text-transform:uppercase;margin-top:.3em}
 .kapitel-liste{list-style:none;display:flex;gap:calc(var(--u)*3);margin-top:calc(var(--u)*3)}
 .kapitel-liste a{color:inherit;text-decoration:none;font-family:var(--mono);font-size:calc(var(--u)*1.3);text-transform:uppercase;border-top:3px solid var(--tinte);padding-top:.5em;display:block}
@@ -300,6 +324,11 @@ kbd{font-family:var(--mono);border:1px solid currentColor;border-radius:3px;padd
   .schalter button{flex:1 1 auto;font-size:12px}
   .regel{flex-direction:column;gap:.4em}
   .ask h1{font-size:8.6vw}
+  .hero-mitte,.hero .kapitel-liste{grid-template-columns:1fr}
+  .logo-gross .logo{width:46vw}
+  .wortmarke b{font-size:7vw}.wortmarke span{font-size:3vw}
+  .chips span{font-size:13px}
+  .finale h1{font-size:10vw}
 }
 /* ---------- Vision ---------- */
 .vision{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:calc(var(--u)*3)}
@@ -315,18 +344,21 @@ kbd{font-family:var(--mono);border:1px solid currentColor;border-radius:3px;padd
 
 /* ---------- Finale: Geldregen + morphender Blob ---------- */
 .finale{overflow:hidden;align-items:center;text-align:center;isolation:isolate}
-.finale-inhalt{position:relative;z-index:2}
-.finale h1{font-size:calc(var(--u)*11);color:var(--putz);text-shadow:0 6px 0 var(--tinte)}
-.finale-inhalt p{display:table;margin-left:auto;margin-right:auto;background:var(--tinte);padding:.2em .6em}
-.finale .namen{color:var(--zoll);font-size:calc(var(--u)*3);margin-top:.3em}
-.finale .marke{margin-top:.5em;color:var(--putz)}
-.finale .klein{margin-top:.8em;color:#c9cdd2}
-.blob{position:absolute;left:50%;top:50%;width:calc(var(--u)*52);aspect-ratio:1;margin:calc(var(--u)*-26) 0 0 calc(var(--u)*-26);z-index:0;
-  background:radial-gradient(circle at 35% 30%,#ffe27a,var(--zoll) 45%,var(--zoll-dk));display:grid;place-items:center;
-  border-radius:42% 58% 63% 37% / 41% 44% 56% 59%;animation:morph 9s ease-in-out infinite alternate,dreh 24s linear infinite;opacity:.22}
-.blob span{font-family:var(--display);font-weight:900;font-size:calc(var(--u)*34);color:var(--tinte);line-height:1;animation:dreh 24s linear infinite reverse}
-.finale.active .blob{opacity:.95;transition:opacity 1.2s}
-.finale.active .finale-inhalt h1{color:#fff}
+.finale-inhalt{position:relative;z-index:3;display:flex;flex-direction:column;align-items:center;gap:calc(var(--u)*1.6)}
+.finale-inhalt .logo{width:calc(var(--u)*9);filter:drop-shadow(6px 6px 0 var(--tinte))}
+.finale h1{font-size:calc(var(--u)*7.2);font-weight:900;font-stretch:125%;line-height:.95;color:var(--zoll);text-shadow:7px 7px 0 var(--tinte)}
+.unterzeile{font-size:calc(var(--u)*2.3);color:#fff;font-weight:500}
+.unterzeile b{font-family:var(--display);font-weight:800;text-transform:uppercase;font-stretch:112%}
+.chips.hell span{border-color:#fff;color:#fff;background:rgba(20,21,24,.35)}
+.finale .klein{color:#fff;opacity:.75;background:var(--tinte);padding:.25em .7em}
+.euro-bg{position:absolute;left:50%;top:50%;transform:translate(-50%,-52%);z-index:0;font-family:var(--display);font-weight:900;font-size:calc(var(--u)*78);line-height:1;
+  color:transparent;-webkit-text-stroke:3px rgba(244,194,27,.28);animation:atmen 7s ease-in-out infinite alternate}
+@keyframes atmen{to{transform:translate(-50%,-52%) scale(1.08) rotate(-6deg)}}
+.blob{position:absolute;left:50%;top:50%;width:calc(var(--u)*64);aspect-ratio:1;margin:calc(var(--u)*-32) 0 0 calc(var(--u)*-32);z-index:1;
+  background:radial-gradient(circle at 35% 30%,#e8402f,var(--signal) 50%,#9e1a0f);
+  border-radius:42% 58% 63% 37% / 41% 44% 56% 59%;animation:morph 9s ease-in-out infinite alternate,dreh 24s linear infinite;opacity:0;transition:opacity 1.4s}
+.finale.active .blob{opacity:1}
+.finale .regen{z-index:2}
 @keyframes morph{
   0%{border-radius:42% 58% 63% 37% / 41% 44% 56% 59%}
   25%{border-radius:68% 32% 41% 59% / 55% 62% 38% 45%}
@@ -358,21 +390,26 @@ kbd{font-family:var(--mono);border:1px solid currentColor;border-radius:3px;padd
 
 <!-- ===== Titel ===== -->
 <section class="slide gelb hero" id="start" aria-label="Titel">
-  <div class="fiktiv">Fiktives Uniprojekt · Kein echtes Unternehmen · Modul Digitale Business Modelle</div>
-  <div class="mass"><span>Unkelstrothega Interfaces</span><span>Business Model Pitch</span></div>
-  <h1>Software für Betriebe, deren Chef <span class="band">auf dem Bau</span> steht.</h1>
-  <div class="unten">
-    <div>
-      <div class="marke">Unkelstrothega<span>·</span>Interfaces</div>
-      <p class="namen">Julian · Niels · Sandro</p>
-      <ol class="kapitel-liste">
-        <li><a href="#k1"><b>1</b>Die Idee</a></li>
-        <li><a href="#k2"><b>2</b>Canvas &amp; USP</a></li>
-        <li><a href="#k3"><b>3</b>Erlösmodell</a></li>
-      </ol>
-    </div>
-    <div class="hinweis">Scrollen zum Weiterlesen<br><kbd>T</kbd> 15-Min-Timer · <kbd>F</kbd> Vollbild</div>
+  <div class="kopf">
+    <span class="fiktiv">Fiktives Uniprojekt · Kein echtes Unternehmen · Digitale Business Modelle</span>
+    <span class="chips"><span>Julian</span><span>Niels</span><span>Sandro</span></span>
   </div>
+  <div class="hero-mitte">
+    <div>
+      <div class="mass"><span>Business Model Pitch</span></div>
+      <h1>Software für Betriebe, deren Chef <span class="band">auf dem Bau</span> steht.</h1>
+    </div>
+    <div class="logo-gross">
+      <div class="logo-slot"></div>
+      <div class="wortmarke"><b>Unkelstrothega</b><span>Interfaces</span></div>
+    </div>
+  </div>
+  <ol class="kapitel-liste">
+    <li><a href="#k1"><b>1</b>Die Idee</a></li>
+    <li><a href="#k2"><b>2</b>Canvas &amp; USP</a></li>
+    <li><a href="#k3"><b>3</b>Erlösmodell</a></li>
+    <li class="hinweis">Scrollen ↓<br><kbd>T</kbd> Timer · <kbd>F</kbd> Vollbild</li>
+  </ol>
 </section>
 
 <!-- ===== Kapitel 1 ===== -->
@@ -595,13 +632,15 @@ kbd{font-family:var(--mono);border:1px solid currentColor;border-radius:3px;padd
   </div>
 </section>
 
-<section class="slide nacht finale" aria-label="Danke">
+<section class="slide nacht finale" aria-label="Finale">
+  <div class="deko euro-bg" aria-hidden="true">€</div>
+  <div class="deko blob" aria-hidden="true"></div>
   <div class="deko regen" id="regen" aria-hidden="true"></div>
-  <div class="deko blob" aria-hidden="true"><span>€</span></div>
   <div class="finale-inhalt">
-    <h1>Danke.</h1>
-    <p class="namen">Julian · Niels · Sandro</p>
-    <p class="marke">Unkelstrothega<span>·</span>Interfaces</p>
+    <div class="logo-slot"></div>
+    <h1>Thomas gibt<br>50 € Startkapital</h1>
+    <p class="unterzeile">Der Rest kommt Monat für Monat. Mit <b>Unkelstrothega Interfaces</b>.</p>
+    <span class="chips hell"><span>Julian</span><span>Niels</span><span>Sandro</span></span>
     <p class="klein">Fiktives Uniprojekt · Modul Digitale Business Modelle</p>
   </div>
 </section>
@@ -615,6 +654,27 @@ kbd{font-family:var(--mono);border:1px solid currentColor;border-radius:3px;padd
 
 <script>
 (() => {
+  // Logo: drei Zollstock-Glieder bilden ein U, ein viertes das I → „UI“
+  let logoNr = 0;
+  const logo = () => {
+    const n = ++logoNr, t = `<line x1="0" y1="0" x2="0" y2="10" stroke="#141518" stroke-width="2.4"/><line x1="5" y1="0" x2="5" y2="5" stroke="#141518" stroke-width="1.3"/>`;
+    const glied = (cls, x, y, w, h, vertikal) => `<g class="${cls}"><rect x="${x}" y="${y}" width="${w}" height="${h}" fill="#F4C21B" stroke="#141518" stroke-width="4"/><rect x="${x + 2}" y="${y + 2}" width="${w - 4}" height="${h - 4}" fill="url(#${vertikal ? 'tv' : 'th'}${n})"/></g>`;
+    return `<svg class="logo" viewBox="0 0 224 192" role="img" aria-label="Logo Unkelstrothega Interfaces">
+      <defs>
+        <pattern id="th${n}" width="10" height="40" patternUnits="userSpaceOnUse">${t}</pattern>
+        <pattern id="tv${n}" width="40" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(-90)">${t}</pattern>
+      </defs>
+      ${glied('g-l', 18, 14, 40, 140, true)}
+      ${glied('g-r', 106, 14, 40, 140, true)}
+      ${glied('g-b', 18, 136, 128, 40, false)}
+      ${glied('g-i', 168, 14, 40, 162, true)}
+      <circle class="niet" cx="38" cy="156" r="6" fill="#D62718" stroke="#141518" stroke-width="2.5"/>
+      <circle class="niet" cx="126" cy="156" r="6" fill="#D62718" stroke="#141518" stroke-width="2.5"/>
+      <circle class="niet" cx="188" cy="34" r="6" fill="#D62718" stroke="#141518" stroke-width="2.5"/>
+    </svg>`;
+  };
+  document.querySelectorAll('.logo-slot').forEach(s => s.outerHTML = logo());
+
   const slides = [...document.querySelectorAll('.slide')];
   const N = slides.length, CM = 20; // jeder Abschnitt = ein Zollstock-Glied à 20 cm
   const spur = document.getElementById('spur'), stand = document.getElementById('stand');
