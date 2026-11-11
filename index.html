@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>BNJS-Interfaces · Pitch</title>
-<meta name="description" content="BNJS-Interfaces: Websites und CRM zur Miete für lokale Betriebe, deren Chef auf dem Bau steht.">
+<title>Unkelstrothega Interfaces · Pitch</title>
+<meta name="description" content="Unkelstrothega Interfaces: Websites und CRM zur Miete für lokale Betriebe, deren Chef auf dem Bau steht.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Hanken+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
@@ -68,6 +68,8 @@ p,li,td,th{font-size:calc(var(--u)*1.7);line-height:1.45}
 .marke span{color:var(--signal)}
 .hinweis{font-family:var(--mono);font-size:calc(var(--u)*1.15);color:#5a4600;text-align:right;line-height:1.7}
 kbd{font-family:var(--mono);border:1px solid currentColor;border-radius:3px;padding:0 .35em}
+.fiktiv{align-self:flex-start;background:var(--tinte);color:var(--zoll);font-family:var(--mono);font-size:calc(var(--u)*1.2);text-transform:uppercase;letter-spacing:.06em;padding:.45em .9em;margin-bottom:calc(var(--u)*2)}
+.namen{font-family:var(--display);font-weight:800;font-size:calc(var(--u)*2.2);text-transform:uppercase;margin-top:.3em}
 .kapitel-liste{list-style:none;display:flex;gap:calc(var(--u)*3);margin-top:calc(var(--u)*3)}
 .kapitel-liste a{color:inherit;text-decoration:none;font-family:var(--mono);font-size:calc(var(--u)*1.3);text-transform:uppercase;border-top:3px solid var(--tinte);padding-top:.5em;display:block}
 .kapitel-liste a b{display:block;font-family:var(--display);font-weight:800;font-size:2.2em;line-height:1}
@@ -112,10 +114,10 @@ kbd{font-family:var(--mono);border:1px solid currentColor;border-radius:3px;padd
 
 /* ---------- Business Model Canvas ---------- */
 .bmc{display:grid;grid-template-columns:repeat(10,1fr);grid-template-rows:auto auto auto;gap:0;padding:3px}
-.feld{background:var(--putz);padding:calc(var(--u)*1.3);min-height:calc(var(--u)*13);box-shadow:0 0 0 3px var(--tinte)}
+.feld{background:var(--putz);padding:calc(var(--u)*1.4);min-height:calc(var(--u)*10);box-shadow:0 0 0 3px var(--tinte)}
 .feld h3{font-family:var(--mono);font-size:calc(var(--u)*1.1);text-transform:uppercase;letter-spacing:.05em;color:var(--stahl);margin-bottom:.6em;font-weight:600}
 .feld ul{list-style:none;display:grid;gap:.3em}
-.feld li{font-size:calc(var(--u)*1.38);line-height:1.35}
+.feld li{font-size:calc(var(--u)*1.6);line-height:1.35}
 .feld li b{font-weight:700}
 .f-kp{grid-column:1/3;grid-row:1/3}
 .f-ka{grid-column:3/5;grid-row:1}
@@ -299,7 +301,51 @@ kbd{font-family:var(--mono);border:1px solid currentColor;border-radius:3px;padd
   .regel{flex-direction:column;gap:.4em}
   .ask h1{font-size:8.6vw}
 }
+/* ---------- Vision ---------- */
+.vision{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:calc(var(--u)*3)}
+.vision > div{border-top:6px solid var(--tinte);padding-top:calc(var(--u)*1.4)}
+.vision > div:first-child{border-color:var(--signal)}
+.vision b{font-family:var(--mono);font-size:calc(var(--u)*1.2);text-transform:uppercase;display:block;margin-bottom:.4em}
+.vision .disp{font-size:calc(var(--u)*2.6)}
+.vision p{margin-top:.5em;font-size:calc(var(--u)*1.55)}
+.fundament{margin-top:calc(var(--u)*4);background:var(--tinte);color:var(--putz);padding:calc(var(--u)*2.6) calc(var(--u)*3);box-shadow:8px 8px 0 var(--zoll)}
+.fundament .disp{font-size:calc(var(--u)*2.8);color:var(--zoll)}
+.fundament p{margin-top:.6em;max-width:80ch;color:#d4d7db}
+@media (max-width:820px){.vision{grid-template-columns:1fr}}
+
+/* ---------- Finale: Geldregen + morphender Blob ---------- */
+.finale{overflow:hidden;align-items:center;text-align:center;isolation:isolate}
+.finale-inhalt{position:relative;z-index:2}
+.finale h1{font-size:calc(var(--u)*11);color:var(--putz);text-shadow:0 6px 0 var(--tinte)}
+.finale-inhalt p{display:table;margin-left:auto;margin-right:auto;background:var(--tinte);padding:.2em .6em}
+.finale .namen{color:var(--zoll);font-size:calc(var(--u)*3);margin-top:.3em}
+.finale .marke{margin-top:.5em;color:var(--putz)}
+.finale .klein{margin-top:.8em;color:#c9cdd2}
+.blob{position:absolute;left:50%;top:50%;width:calc(var(--u)*52);aspect-ratio:1;margin:calc(var(--u)*-26) 0 0 calc(var(--u)*-26);z-index:0;
+  background:radial-gradient(circle at 35% 30%,#ffe27a,var(--zoll) 45%,var(--zoll-dk));display:grid;place-items:center;
+  border-radius:42% 58% 63% 37% / 41% 44% 56% 59%;animation:morph 9s ease-in-out infinite alternate,dreh 24s linear infinite;opacity:.22}
+.blob span{font-family:var(--display);font-weight:900;font-size:calc(var(--u)*34);color:var(--tinte);line-height:1;animation:dreh 24s linear infinite reverse}
+.finale.active .blob{opacity:.95;transition:opacity 1.2s}
+.finale.active .finale-inhalt h1{color:#fff}
+@keyframes morph{
+  0%{border-radius:42% 58% 63% 37% / 41% 44% 56% 59%}
+  25%{border-radius:68% 32% 41% 59% / 55% 62% 38% 45%}
+  50%{border-radius:35% 65% 30% 70% / 64% 36% 64% 36%}
+  75%{border-radius:58% 42% 69% 31% / 33% 58% 42% 67%}
+  100%{border-radius:30% 70% 52% 48% / 52% 30% 70% 48%}}
+@keyframes dreh{to{transform:rotate(360deg)}}
+.regen{position:absolute;inset:0;z-index:1;pointer-events:none}
+.geld{position:absolute;bottom:-12vh;left:var(--x);width:var(--w);animation:flug var(--dur) linear var(--del) infinite;animation-play-state:paused;opacity:0}
+.finale.active .geld{animation-play-state:running}
+.geld svg{display:block;width:100%;animation:flattern calc(var(--dur) / 4) ease-in-out infinite alternate}
+@keyframes flug{
+  0%{transform:translate(0,0) rotate(0);opacity:0}
+  8%{opacity:1}
+  85%{opacity:1}
+  100%{transform:translate(var(--dx),-125vh) rotate(var(--r));opacity:0}}
+@keyframes flattern{from{transform:rotateX(0) skewY(-4deg)}to{transform:rotateX(55deg) skewY(5deg)}}
 @media (prefers-reduced-motion:reduce){
+  .regen{display:none}
   html{scroll-behavior:auto}
   *,*::before,*::after{transition-duration:.01ms!important;transition-delay:0s!important;animation:none!important}
 }
@@ -312,15 +358,17 @@ kbd{font-family:var(--mono);border:1px solid currentColor;border-radius:3px;padd
 
 <!-- ===== Titel ===== -->
 <section class="slide gelb hero" id="start" aria-label="Titel">
-  <div class="mass"><span>BNJS-Interfaces</span><span>Business Model Pitch · Digitale Business Modelle</span></div>
+  <div class="fiktiv">Fiktives Uniprojekt · Kein echtes Unternehmen · Modul Digitale Business Modelle</div>
+  <div class="mass"><span>Unkelstrothega Interfaces</span><span>Business Model Pitch</span></div>
   <h1>Software für Betriebe, deren Chef <span class="band">auf dem Bau</span> steht.</h1>
   <div class="unten">
     <div>
-      <div class="marke">BNJS<span>·</span>Interfaces</div>
+      <div class="marke">Unkelstrothega<span>·</span>Interfaces</div>
+      <p class="namen">Julian · Niels · Sandro</p>
       <ol class="kapitel-liste">
         <li><a href="#k1"><b>1</b>Die Idee</a></li>
-        <li><a href="#k2"><b>2</b>Canvas &amp; Edge</a></li>
-        <li><a href="#k3"><b>3</b>So verdienen wir Geld</a></li>
+        <li><a href="#k2"><b>2</b>Canvas &amp; USP</a></li>
+        <li><a href="#k3"><b>3</b>Erlösmodell</a></li>
       </ol>
     </div>
     <div class="hinweis">Scrollen zum Weiterlesen<br><kbd>T</kbd> 15-Min-Timer · <kbd>F</kbd> Vollbild</div>
@@ -374,33 +422,12 @@ kbd{font-family:var(--mono);border:1px solid currentColor;border-radius:3px;padd
   <p class="lead" style="margin-top:calc(var(--u)*4)">Sicher, DSGVO-konform, mit Datenspeicherung in der EU. Lokale Betriebe aus jeder Branche, wir starten im Handwerk.</p>
 </section>
 
-<section class="slide" aria-label="Value Proposition">
-  <div class="mass"><span>Value Proposition</span></div>
-  <p class="vp" style="margin-top:calc(var(--u)*2)">
-    <em>Für</em><strong>inhabergeführte Handwerksbetriebe</strong>,
-    <em>die</em>keine Zeit für Digitalisierung haben und von Agenturen ignoriert werden,
-    <em>bietet</em><strong>BNJS-Interfaces Website und CRM zur Miete</strong>,
-    <em>sodass</em>sie <strong>ohne Startinvestition</strong> Aufträge und Kunden digital im Griff haben.
-  </p>
-  <table class="tab">
-    <thead><tr><th>Dimension</th><th>Heute</th><th>Mit uns</th></tr></thead>
-    <tbody>
-      <tr><td>Zeit</td><td class="alt">~5 Std./Woche Büro nach Feierabend</td><td>~1 Std./Woche, Angebote vom Handy</td></tr>
-      <tr><td>Kosten</td><td class="alt">Agentur 1.500–5.000 € einmalig, Branchensoftware 59–89 € pro Nutzer</td><td>20–30 % unter Marktpreis, persönlich betreut</td></tr>
-      <tr><td>Umsatz</td><td class="alt">Anfragen nur per Telefon</td><td>Online-Anfragen rund um die Uhr</td></tr>
-      <tr><td>Risiko</td><td class="alt">Zettel weg, Daten ungesichert</td><td>Gesichert, DSGVO-konform, Speicherung in der EU</td></tr>
-      <tr><td>Qualität</td><td class="alt">Website von 2014, nicht mobil</td><td>Modern, mobil, bei Google sichtbar</td></tr>
-    </tbody>
-  </table>
-  <p class="klein" style="margin-top:.8em">Werte sind Annahmen und werden mit den ersten Pilotkunden geprüft.</p>
-</section>
-
 <!-- ===== Kapitel 2 ===== -->
-<section class="slide nacht kapitel" id="k2" aria-label="Kapitel 2: Business Model Canvas und Edge">
+<section class="slide nacht kapitel" id="k2" aria-label="Kapitel 2: Business Model Canvas und USP">
   <div class="nr">2</div>
   <div>
     <div class="schritt">Schritt 2 von 3</div>
-    <div class="disp">Canvas &amp; Edge</div>
+    <div class="disp">Canvas &amp; USP</div>
     <p>Unser Geschäftsmodell auf einer Seite und warum wir es besser können als andere.</p>
   </div>
 </section>
@@ -409,15 +436,15 @@ kbd{font-family:var(--mono);border:1px solid currentColor;border-radius:3px;padd
   <div class="mass"><span>Business Model Canvas</span></div>
   <h2>Das ganze Modell auf einer Seite.</h2>
   <div class="bmc">
-    <div class="feld f-kp"><h3>Schlüsselpartner</h3><ul><li><b>Cloudflare</b>: Hosting, Speicherung in der EU</li><li><b>GitHub</b>: Code &amp; Versionen</li><li><b>KI-Anbieter</b>: Claude Code, Codex</li><li>Innungen &amp; Handwerkskammer</li><li>Großhändler</li><li>Steuerberater</li></ul></div>
-    <div class="feld f-ka"><h3>Schlüsselaktivitäten</h3><ul><li>Vertrieb vor Ort</li><li>KI-gestützte Entwicklung</li><li>Betrieb, Wartung, Updates</li><li>Workshops</li></ul></div>
-    <div class="feld f-kr"><h3>Schlüsselressourcen</h3><ul><li>Team: Vertrieb + Technik</li><li>Know-how Cloudflare &amp; GitHub</li><li>Bausteine, die wir wiederverwenden</li><li>Referenzkunden</li></ul></div>
-    <div class="feld f-vp"><h3>Wertangebot</h3><ul><li><b>Website &amp; CRM zur Miete</b></li><li>Fertig eingerichtet, nichts selbst machen</li><li>Ohne Startinvestition</li><li>DSGVO-konform, Daten in der EU</li><li>Tage statt Wochen</li></ul></div>
-    <div class="feld f-cr"><h3>Kundenbeziehung</h3><ul><li>Persönlich, fester Ansprechpartner</li><li>Änderungen per WhatsApp</li><li>Laufende Betreuung</li></ul></div>
-    <div class="feld f-ch"><h3>Kanäle</h3><ul><li>Direkt im Betrieb</li><li>Großhandel, Innungen</li><li>Empfehlungen</li><li>Eigene Website</li></ul></div>
-    <div class="feld f-cs"><h3>Kundensegmente</h3><ul><li><b>Start: inhabergeführte Handwerksbetriebe in OWL</b></li><li>Danach: Friseure, Imbiss, Kleinbetriebe</li><li>Workshops: technikaffine Selbstständige &amp; Teams</li></ul></div>
-    <div class="feld f-c"><h3>Kostenstruktur</h3><ul><li>Technik ~180 €/Monat: KI-Tools 20–40 € pro Kopf, Cloudflare-Teamaccount ~20 €, GitHub gratis</li><li>Fahrten, Telefon, Versicherung, Steuerberater</li><li>Keine Fixgehälter: Gewinnbeteiligung</li></ul></div>
-    <div class="feld f-r"><h3>Einnahmequellen</h3><ul><li><b>Monatsmiete (Kern)</b>: Ø 163 €</li><li>Einrichtung: Ø 960 € einmalig</li><li>Workshops: 290 € pro Person</li><li>Individuelle Projekte</li></ul></div>
+    <div class="feld f-kp"><h3>Schlüsselpartner</h3><ul><li>Cloudflare, GitHub</li><li>KI-Anbieter</li><li>Innungen</li></ul></div>
+    <div class="feld f-ka"><h3>Schlüsselaktivitäten</h3><ul><li>Vertrieb vor Ort</li><li>KI-Entwicklung</li><li>Betreuung</li></ul></div>
+    <div class="feld f-kr"><h3>Schlüsselressourcen</h3><ul><li>Team</li><li>Infrastruktur-Know-how</li></ul></div>
+    <div class="feld f-vp"><h3>Wertangebot</h3><ul><li><b>Website &amp; CRM zur Miete</b></li><li>Fertig eingerichtet</li><li>DSGVO-konform</li></ul></div>
+    <div class="feld f-cr"><h3>Kundenbeziehung</h3><ul><li>Persönlich</li><li>Dauerhafte Betreuung</li></ul></div>
+    <div class="feld f-ch"><h3>Kanäle</h3><ul><li>Direkt im Betrieb</li><li>Empfehlungen</li></ul></div>
+    <div class="feld f-cs"><h3>Kundensegmente</h3><ul><li><b>Handwerksbetriebe in OWL</b></li><li>Danach: Kleinbetriebe jeder Branche</li></ul></div>
+    <div class="feld f-c"><h3>Kostenstruktur</h3><ul><li>Technik ~140 €/Monat</li><li>Gewinnbeteiligung statt Fixgehälter</li></ul></div>
+    <div class="feld f-r"><h3>Einnahmequellen</h3><ul><li><b>Monatsmiete</b> (Kern)</li><li>Einrichtung, Workshops</li></ul></div>
   </div>
 </section>
 
@@ -431,63 +458,29 @@ kbd{font-family:var(--mono);border:1px solid currentColor;border-radius:3px;padd
     <div class="punkt" style="left:52%;top:46%">Freelancer<i>Einzelprojekt, danach weg</i></div>
     <div class="punkt" style="left:22%;top:30%">Branchensoftware<i>59–89 € pro Nutzer, selbst einrichten</i></div>
     <div class="punkt" style="left:18%;top:76%">Wix · Jimdo<i>Ab 9 €/Monat, aber: selbst bauen</i></div>
-    <div class="punkt wir" style="left:77%;top:74%">BNJS-Interfaces<i>Wir bauen. Er zahlt Miete.</i></div>
+    <div class="punkt wir" style="left:77%;top:74%">Unkelstrothega Interfaces<i>Wir bauen. Er zahlt Miete.</i></div>
     <div class="leer" aria-hidden="true"></div>
   </div>
 </section>
 
-<section class="slide nacht" aria-label="Unsere Edge">
-  <div class="mass"><span>Unsere Edge</span></div>
+<section class="slide nacht" aria-label="Unser USP">
+  <div class="mass"><span>Unser USP</span></div>
   <h2>Warum das nicht<br><span class="band" style="color:var(--tinte)">jeder</span> kann.</h2>
   <div class="edge">
     <div><div class="disp">Wir gehen hin.</div><p>Agenturen warten auf Anfragen, Baukästen auf Klicks. Wir stehen morgens beim Großhändler und im Betrieb. Dort sind die Kunden, die sonst niemand anspricht.</p></div>
     <div><div class="disp">Wir beherrschen die Infrastruktur.</div><p>KI schreibt Code, aber Cloudflare, GitHub, Deployments, Datenbanken, Zugriffsrechte und Backups sauber aufzusetzen ist Fachwissen. Genau das macht eine App sicher und betriebsbereit.</p></div>
-    <div><div class="disp">Wir sind günstiger, ohne draufzuzahlen.</div><p>Unsere gesamte Technik kostet rund 180 € im Monat. Deshalb liegen wir 20–30 % unter dem Marktpreis und verdienen trotzdem gut. Billig sind wir nicht.</p></div>
+    <div><div class="disp">Wir sind günstiger, ohne draufzuzahlen.</div><p>Unsere gesamte Technik kostet rund 140 € im Monat. Deshalb liegen wir 20–30 % unter dem Marktpreis und verdienen trotzdem gut. Billig sind wir nicht.</p></div>
     <div><div class="disp">Wir bleiben.</div><p>Miete statt Projekt heißt: Wir betreuen den Betrieb dauerhaft. Freelancer liefern einmal und sind weg.</p></div>
   </div>
 </section>
 
-<section class="slide nacht" aria-label="Wie wir bauen">
-  <div class="mass"><span>Edge in der Praxis</span></div>
-  <div class="werk">
-    <div>
-      <h2>Tage statt<br>Wochen.</h2>
-      <p class="lead">KI schreibt den Code, wir prüfen, testen, betreiben und verantworten ihn.</p>
-      <div class="kette">
-        <div><b>Bauen</b><span>Claude Code &amp; Codex, geprüft von uns</span></div>
-        <div><b>Versionieren</b><span>GitHub: jede Änderung nachvollziehbar, Rechte sauber getrennt</span></div>
-        <div><b>Betreiben</b><span>Cloudflare: schnell, günstig, Datenspeicherung in der EU</span></div>
-      </div>
-    </div>
-    <div class="term" aria-label="Beispiel einer Entwicklungssitzung">
-      <div class="bar"><i></i><i></i><i></i></div>
-      <div id="term"></div>
-    </div>
-  </div>
-</section>
-
-<section class="slide" aria-label="Team">
-  <div class="mass"><span>Schlüsselressource: Team</span></div>
-  <h2>Vier Leute. Jung, hungrig,<br>Vollzeit dabei.</h2>
-  <div class="team">
-    <div class="person ceo"><span class="rolle">CEO</span><p>Strategie, Finanzen, Kunden. Springt überall ein, wo es brennt.</p><div class="name">Sandro</div></div>
-    <div class="person"><span class="rolle">Vertrieb</span><p>Akquise vor Ort, Demos, Kundenbeziehung.</p><div class="name">Julian</div></div>
-    <div class="person"><span class="rolle">Vertrieb</span><p>Großhandel, Innungen, Netzwerk, Workshops.</p><div class="name">Niels</div></div>
-    <div class="person tech"><span class="rolle">Technik</span><p>KI-Entwicklung, Cloudflare, GitHub, Sicherheit.</p><div class="name">Ben</div></div>
-  </div>
-  <div class="regel">
-    <div class="disp">50 / 50</div>
-    <p>Wer verkauft und wer baut, teilt den Gewinn eines Projekts. Wer allein liefert, bekommt 100 %. Ausgezahlt wird nur, was nach allen Kosten übrig bleibt.</p>
-  </div>
-</section>
-
 <!-- ===== Kapitel 3 ===== -->
-<section class="slide nacht kapitel" id="k3" aria-label="Kapitel 3: So verdienen wir Geld">
+<section class="slide nacht kapitel" id="k3" aria-label="Kapitel 3: Erlösmodell">
   <div class="nr">3</div>
   <div>
     <div class="schritt">Schritt 3 von 3</div>
-    <div class="disp">So verdienen wir Geld</div>
-    <p>Preise, Einnahmen, Vertrieb und die Zahlen für drei Jahre.</p>
+    <div class="disp">Erlösmodell</div>
+    <p>Preise, Einnahmequellen und die Planung für drei Jahre.</p>
   </div>
 </section>
 
@@ -538,24 +531,6 @@ kbd{font-family:var(--mono);border:1px solid currentColor;border-radius:3px;padd
   </div>
 </section>
 
-<section class="slide" aria-label="Vertrieb">
-  <div class="mass"><span>So kommt das Geld rein</span></div>
-  <h2>Wir warten nicht auf Klicks.<br><span class="rot">Wir klingeln.</span></h2>
-  <p class="lead">Julian und Niels, Vollzeit im Vertrieb. Ziel: <b>10 Abschlüsse pro Kopf und Monat.</b></p>
-  <div class="funnel">
-    <div class="stufe"><label>Gespräche / Woche</label><div class="balken" style="--w:100%">100</div></div>
-    <div class="stufe"><label>Demos / Woche</label><div class="balken" style="--w:20%">20</div></div>
-    <div class="stufe"><label>Abschlüsse / Woche</label><div class="balken" style="--w:5%">5</div></div>
-    <div class="stufe"><label>Neukunden / Monat</label><div class="balken" style="--w:20%">20</div></div>
-  </div>
-  <div class="orte">
-    <div><b>Vor Ort</b>Direkt in den Betrieb, mit Demo auf dem Tablet</div>
-    <div><b>Großhandel</b>Morgens um 7 an der Theke, da stehen die Chefs</div>
-    <div><b>Innungen</b>Handwerkskammer, Stammtische, Verbände</div>
-    <div><b>Empfehlung</b>Ein Elektriker kennt zehn andere Handwerker</div>
-  </div>
-</section>
-
 <section class="slide" aria-label="Zahlen">
   <div class="mass"><span>Planung · 3 Jahre</span></div>
   <h2>Die Miete wächst mit jedem Kunden.</h2>
@@ -572,7 +547,7 @@ kbd{font-family:var(--mono);border:1px solid currentColor;border-radius:3px;padd
       <div class="kpi"><label>Gewinn pro Kopf / Monat, J1 → J3</label><div class="wert" id="k-kopf">–</div></div>
     </div>
   </div>
-  <p class="klein" style="margin-top:1em">Annahmen: Kundenmix 60 % Website, 30 % Website + CRM, 10 % individuell → Ø 163 € Miete, Ø 960 € Einrichtung. 2 % Kündigungen/Monat, 1 Workshop/Monat mit 6 Personen. Kosten: ~1.100 €/Monat fix (Technik ~180 €, Fahrten, Telefon, Versicherung, Steuerberater), ~1 €/Kunde/Monat, je 150 Kunden eine zusätzliche Stelle (60 T€/Jahr). Vor Steuern und Krankenversicherung.</p>
+  <p class="klein" style="margin-top:1em">Annahmen: Kundenmix 60 % Website, 30 % Website + CRM, 10 % individuell → Ø 163 € Miete, Ø 960 € Einrichtung. 2 % Kündigungen/Monat, 1 Workshop/Monat mit 6 Personen. Kosten: ~1.100 €/Monat fix (Technik ~140 €, Fahrten, Telefon, Versicherung, Steuerberater), ~1 €/Kunde/Monat, je 150 Kunden eine zusätzliche Stelle (60 T€/Jahr). Vor Steuern und Krankenversicherung.</p>
 </section>
 
 <section class="slide" aria-label="Unit Economics">
@@ -584,19 +559,8 @@ kbd{font-family:var(--mono);border:1px solid currentColor;border-radius:3px;padd
   </div>
   <div class="drei">
     <div><div class="disp">7</div><p>Kunden decken alle laufenden Fixkosten von ~1.100 € im Monat.</p></div>
-    <div><div class="disp">~180 €</div><p>Technik im Monat für das ganze Team: KI-Tools, Cloudflare. GitHub ist gratis.</p></div>
+    <div><div class="disp">~140 €</div><p>Technik im Monat für das ganze Team: KI-Tools, Cloudflare. GitHub ist gratis.</p></div>
     <div><div class="disp">0 €</div><p>Fremdkapital nötig. Wir wachsen aus eigener Kraft.</p></div>
-  </div>
-</section>
-
-<section class="slide nacht" aria-label="Risiken">
-  <div class="mass"><span>Risiken &amp; Antworten</span></div>
-  <h2>Die Fragen, die ihr<br>gleich stellen wollt.</h2>
-  <div class="fragen">
-    <div class="frage"><div class="disp">Das kann doch jetzt jeder mit KI.</div><p>Code schreiben vielleicht. Cloudflare, GitHub und den sicheren Betrieb aufsetzen nicht. Und niemand außer uns fährt zum Elektriker und betreut ihn danach.</p></div>
-    <div class="frage"><div class="disp">Und wenn die Kunden kündigen?</div><p>Kunden, Aufträge und Abläufe liegen im System, ein Wechsel ist aufwendig. Wir planen trotzdem vorsichtig mit 2 % Kündigungen pro Monat.</p></div>
-    <div class="frage"><div class="disp">DSGVO mit einem US-Anbieter?</div><p>Datenschutz und Recht kennen wir: Speicherung in der EU, Auftragsverarbeitungsvertrag, EU-Standardvertragsklauseln. Steuern macht von Anfang an ein Steuerberater.</p></div>
-    <div class="frage"><div class="disp">Was, wenn der Support explodiert?</div><p>Wiederverwendbare Bausteine statt Einzelanfertigungen. Je 150 Kunden stellen wir eine weitere Kraft für Technik und Support ein, bezahlt aus der Miete.</p></div>
   </div>
 </section>
 
@@ -612,8 +576,33 @@ kbd{font-family:var(--mono);border:1px solid currentColor;border-radius:3px;padd
     <h1>Kennt ihr einen <span class="band">Handwerker?</span></h1>
     <div>
       <p class="lead">Wir suchen <b>10 Pilotkunden</b>, die Website oder CRM drei Monate testen. Und wir wollen eure Stimme beim Voting.</p>
-      <p class="marke" style="margin-top:1em">BNJS<span>·</span>Interfaces</p>
+      <p class="marke" style="margin-top:1em">Unkelstrothega<span>·</span>Interfaces</p>
     </div>
+  </div>
+</section>
+
+<section class="slide" aria-label="Vision">
+  <div class="mass"><span>Vision</span></div>
+  <h2>Das ist erst<br>der <span class="band">Start</span>.</h2>
+  <div class="vision">
+    <div><b>Heute</b><div class="disp">Websites &amp; CRM zur Miete</div><p>Für lokale Betriebe, die sonst niemand digitalisiert.</p></div>
+    <div><b>Als Nächstes</b><div class="disp">KI-Services</div><p>Wir gehen mit den KI-Trends: Assistenten, Automatisierungen, neue Werkzeuge für unsere Kunden.</p></div>
+    <div><b>Langfristig</b><div class="disp">Neue Systeme &amp; Branchen</div><p>Weitere Leasing-Angebote, fertige Produkte und digitale Dienstleistungen. Mit Software lässt sich fast alles bauen.</p></div>
+  </div>
+  <div class="fundament">
+    <div class="disp">Das Fundament: monatliche Service-Pauschalen.</div>
+    <p>Langfristige Verträge bringen über viele Jahre planbare Erträge. Und unsere Kunden bleiben gern: Wer sein Geschäft mit unseren Systemen führt und dabei gut betreut wird, hat keinen Grund zu wechseln. Wir entwickeln die Systeme mit ihm weiter.</p>
+  </div>
+</section>
+
+<section class="slide nacht finale" aria-label="Danke">
+  <div class="deko regen" id="regen" aria-hidden="true"></div>
+  <div class="deko blob" aria-hidden="true"><span>€</span></div>
+  <div class="finale-inhalt">
+    <h1>Danke.</h1>
+    <p class="namen">Julian · Niels · Sandro</p>
+    <p class="marke">Unkelstrothega<span>·</span>Interfaces</p>
+    <p class="klein">Fiktives Uniprojekt · Modul Digitale Business Modelle</p>
   </div>
 </section>
 
@@ -638,10 +627,11 @@ kbd{font-family:var(--mono);border:1px solid currentColor;border-radius:3px;padd
   });
 
   // Elemente für die Eingangsanimation markieren, Gruppen gestaffelt
-  const gruppen = '.produkte,.team,.bmc,.fragen,.stroeme,.orte,.strecke,.drei,.edge,.pakete,.liste,.kpis,.kapitel-liste,.funnel,.vergleich,.tab tbody';
+  const gruppen = '.vision,.produkte,.team,.bmc,.fragen,.stroeme,.orte,.strecke,.drei,.edge,.pakete,.liste,.kpis,.kapitel-liste,.funnel,.vergleich,.tab tbody';
   slides.forEach(s => {
     let d = 0;
     [...s.children].forEach(el => {
+      if (el.matches('.deko')) return;
       if (el.matches('.mass')) { el.classList.add('rv'); return; }
       const g = el.matches(gruppen) ? el : el.querySelector(':scope > ' + gruppen.split(',').join(', :scope > '));
       if (el.matches(gruppen)) {
@@ -728,7 +718,7 @@ kbd{font-family:var(--mono);border:1px solid currentColor;border-radius:3px;padd
     ['ok', '✓ Oberfläche: mobil, Angebot in 3 Klicks vom Handy'],
     ['ok', '✓ Tests: 42 von 42 bestanden'],
     ['p', '$ git push origin main'],
-    ['dim', '  Review durch Ben · freigegeben'],
+    ['dim', '  Review · freigegeben'],
     ['p', '$ wrangler deploy'],
     ['ok', '✓ Live auf Cloudflare · Datenspeicherung: EU'],
   ];
@@ -790,7 +780,7 @@ kbd{font-family:var(--mono);border:1px solid currentColor;border-radius:3px;padd
     const j = modell(szenario).jahre;
     document.getElementById('k-kunden').textContent = fmt(j[2].kunden);
     document.getElementById('k-mrr').innerHTML = fmt(m[35]) + '<small> €</small>';
-    document.getElementById('k-kopf').innerHTML = fmt(j[0].gewinn / 48) + ' → ' + fmt(j[2].gewinn / 48) + '<small> €</small>';
+    document.getElementById('k-kopf').innerHTML = fmt(j[0].gewinn / 36) + ' → ' + fmt(j[2].gewinn / 36) + '<small> €</small>';
   }
   document.querySelectorAll('.schalter button').forEach(b => b.onclick = () => {
     szenario = +b.dataset.s;
@@ -802,6 +792,22 @@ kbd{font-family:var(--mono);border:1px solid currentColor;border-radius:3px;padd
   function onEnter(s) {
     if (s.querySelector('#term')) terminal();
     if (s.querySelector('#chart')) chart(true);
+  }
+
+  // Geldregen fürs Finale: Scheine und Münzen fliegen nach oben
+  const schein = w => `<svg viewBox="0 0 120 64"><rect x="2" y="2" width="116" height="60" rx="5" fill="#F4C21B" stroke="#141518" stroke-width="3"/><rect x="10" y="10" width="100" height="44" rx="3" fill="none" stroke="#141518" stroke-width="1.5" stroke-dasharray="3 3"/><circle cx="60" cy="32" r="15" fill="#141518"/><text x="60" y="39" text-anchor="middle" font-family="Archivo,sans-serif" font-weight="900" font-size="20" fill="#F4C21B">€</text><text x="16" y="24" font-family="Archivo,sans-serif" font-weight="800" font-size="11" fill="#141518">${w}</text><text x="104" y="50" text-anchor="end" font-family="Archivo,sans-serif" font-weight="800" font-size="11" fill="#141518">${w}</text></svg>`;
+  const muenze = `<svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="29" fill="#ffd43b" stroke="#141518" stroke-width="3"/><circle cx="32" cy="32" r="21" fill="none" stroke="#C99A0A" stroke-width="2"/><text x="32" y="42" text-anchor="middle" font-family="Archivo,sans-serif" font-weight="900" font-size="28" fill="#141518">€</text></svg>`;
+  const regen = document.getElementById('regen');
+  if (regen && !ruhig) {
+    const zufall = (a, b) => a + Math.random() * (b - a);
+    for (let i = 0; i < 34; i++) {
+      const m = i % 3 === 0;
+      const el = document.createElement('div');
+      el.className = 'geld';
+      el.style.cssText = `--x:${zufall(-4, 96)}%;--w:${m ? zufall(34, 56) : zufall(80, 140)}px;--dx:${zufall(-160, 160)}px;--r:${zufall(-540, 540)}deg;--dur:${zufall(6, 12)}s;--del:${zufall(-12, 0)}s`;
+      el.innerHTML = m ? muenze : schein([50, 100, 200, 500][i % 4]);
+      regen.appendChild(el);
+    }
   }
 
   sichtbar(); fortschritt();
