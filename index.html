@@ -1,0 +1,812 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BNJS-Interfaces · Pitch</title>
+<meta name="description" content="BNJS-Interfaces: Websites und CRM zur Miete für lokale Betriebe, deren Chef auf dem Bau steht.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Hanken+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<script>document.documentElement.classList.add('js')</script>
+<style>
+:root{
+  --putz:#E9E9E5;      /* Rohputz: Grundfläche */
+  --tinte:#141518;     /* Tinte: Text */
+  --zoll:#F4C21B;      /* Zollstock-Gelb */
+  --zoll-dk:#C99A0A;
+  --signal:#D62718;    /* Zollstock-Rot */
+  --stahl:#5B6470;     /* Sekundärtext */
+  --ruler-h:60px;
+  --u:min(1vw,1.78vh);
+  --display:"Archivo",Impact,sans-serif;
+  --body:"Hanken Grotesk",system-ui,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--putz);color:var(--tinte);font-family:var(--body);-webkit-font-smoothing:antialiased;padding-bottom:var(--ruler-h);overflow-x:clip}
+:focus-visible{outline:3px solid var(--signal);outline-offset:3px}
+
+/* ---------- Abschnitte ---------- */
+.slide{min-height:calc(100vh - var(--ruler-h));padding:calc(var(--u)*6) calc(var(--u)*6.5);display:flex;flex-direction:column;justify-content:center;gap:0;position:relative}
+.slide.gelb{background:var(--zoll)}
+.slide.nacht{background:var(--tinte);color:var(--putz)}
+
+.mass{font-family:var(--mono);font-size:calc(var(--u)*1.25);letter-spacing:.04em;color:var(--stahl);display:flex;gap:1.2em;align-items:center;text-transform:uppercase}
+.mass b{color:var(--signal);font-weight:600}
+.nacht .mass{color:#9aa2ad}
+.gelb .mass{color:#5a4600}
+.mass::after{content:"";flex:1;height:1px;background:currentColor;opacity:.35}
+
+h1,h2,.disp{font-family:var(--display);font-weight:800;font-stretch:112%;text-transform:uppercase;line-height:1.04;letter-spacing:-.01em}
+h1{font-size:calc(var(--u)*7.4)}
+h2{font-size:calc(var(--u)*4.9);margin:calc(var(--u)*1.6) 0 calc(var(--u)*2.6)}
+.lead{font-size:calc(var(--u)*2.05);line-height:1.4;max-width:54ch;font-weight:500}
+p,li,td,th{font-size:calc(var(--u)*1.7);line-height:1.45}
+.klein{font-size:calc(var(--u)*1.3);color:var(--stahl)}
+.nacht .klein{color:#9aa2ad}
+.rot{color:var(--signal)}
+
+/* Markierung wie Signalband */
+.band{position:relative;display:inline-block;padding:0 .1em;z-index:0}
+.band::before{content:"";position:absolute;left:0;right:0;top:.06em;bottom:.02em;background:var(--zoll);z-index:-1;
+  transform:scaleX(0);transform-origin:left;transition:transform .8s .5s cubic-bezier(.7,0,.2,1)}
+.active .band::before{transform:scaleX(1)}
+.gelb .band::before{background:var(--tinte)}
+.gelb .band{color:var(--zoll)}
+
+/* ---------- Eingangsanimation ---------- */
+.js .rv{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .8s cubic-bezier(.2,.8,.2,1);transition-delay:var(--d,0s)}
+.js .rv.in{opacity:1;transform:none}
+
+/* ---------- Hero ---------- */
+.hero{justify-content:space-between}
+.hero h1{max-width:17ch;font-size:calc(var(--u)*7.8)}
+.hero .unten{display:flex;justify-content:space-between;align-items:flex-end;gap:2em}
+.marke{font-family:var(--display);font-weight:800;font-stretch:125%;font-size:calc(var(--u)*2.6);letter-spacing:.01em}
+.marke span{color:var(--signal)}
+.hinweis{font-family:var(--mono);font-size:calc(var(--u)*1.15);color:#5a4600;text-align:right;line-height:1.7}
+kbd{font-family:var(--mono);border:1px solid currentColor;border-radius:3px;padding:0 .35em}
+.kapitel-liste{list-style:none;display:flex;gap:calc(var(--u)*3);margin-top:calc(var(--u)*3)}
+.kapitel-liste a{color:inherit;text-decoration:none;font-family:var(--mono);font-size:calc(var(--u)*1.3);text-transform:uppercase;border-top:3px solid var(--tinte);padding-top:.5em;display:block}
+.kapitel-liste a b{display:block;font-family:var(--display);font-weight:800;font-size:2.2em;line-height:1}
+.kapitel-liste a:hover{color:var(--signal);border-color:var(--signal)}
+
+/* ---------- Kapitel-Trenner ---------- */
+.kapitel{flex-direction:row;align-items:center;gap:calc(var(--u)*5)}
+.kapitel .nr{font-family:var(--display);font-weight:900;font-stretch:125%;font-size:calc(var(--u)*30);line-height:.8;color:var(--zoll)}
+.kapitel .disp{font-size:calc(var(--u)*6.4)}
+.kapitel .schritt{font-family:var(--mono);font-size:calc(var(--u)*1.3);text-transform:uppercase;color:#9aa2ad;letter-spacing:.06em}
+.kapitel p{color:#c9cdd2;margin-top:1em;max-width:48ch;font-size:calc(var(--u)*1.9)}
+
+/* ---------- Persona ---------- */
+.zwei{display:grid;grid-template-columns:1.1fr 1fr;gap:calc(var(--u)*5);align-items:start}
+.akte{background:#fff;border:2px solid var(--tinte);padding:calc(var(--u)*2.4);position:relative;box-shadow:8px 8px 0 var(--tinte)}
+.akte dl{display:grid;grid-template-columns:auto 1fr;gap:.55em 1.4em;font-size:calc(var(--u)*1.7)}
+.akte dt{font-family:var(--mono);font-size:.78em;text-transform:uppercase;color:var(--stahl);padding-top:.2em}
+.akte .tag{position:absolute;top:-1.1em;right:1em;background:var(--signal);color:#fff;font-family:var(--mono);font-size:calc(var(--u)*1.1);padding:.25em .7em;text-transform:uppercase}
+.zitat{font-family:var(--display);font-weight:800;font-size:calc(var(--u)*3.3);line-height:1.08;text-transform:uppercase}
+.zitat small{display:block;font-family:var(--mono);font-size:calc(var(--u)*1.2);font-weight:400;text-transform:none;color:var(--stahl);margin-top:1em;line-height:1.5}
+.liste{list-style:none;display:grid;gap:.6em;margin-top:calc(var(--u)*2.4)}
+.liste li{padding-left:1.4em;position:relative}
+.liste li::before{content:"";position:absolute;left:0;top:.62em;width:.7em;height:3px;background:var(--signal)}
+
+/* ---------- Produkte ---------- */
+.produkte{display:grid;grid-template-columns:repeat(4,1fr);gap:calc(var(--u)*2)}
+.produkt{border-top:6px solid var(--tinte);padding-top:calc(var(--u)*1.4)}
+.produkt .disp{font-size:calc(var(--u)*2.6)}
+.produkt p{margin-top:.5em;font-size:calc(var(--u)*1.55)}
+.produkt.ws{border-color:var(--signal)}
+
+/* ---------- VP ---------- */
+.vp{font-size:calc(var(--u)*2.4);line-height:1.5;max-width:62ch;font-weight:500}
+.vp em{font-style:normal;font-family:var(--mono);font-size:.6em;text-transform:uppercase;color:var(--stahl);margin-right:.4em}
+.vp strong{background:linear-gradient(transparent 62%,var(--zoll) 62%);font-weight:700}
+.tab{width:100%;border-collapse:collapse;margin-top:calc(var(--u)*3)}
+.tab th{font-family:var(--mono);font-size:calc(var(--u)*1.15);text-transform:uppercase;text-align:left;color:var(--stahl);font-weight:400;padding:.4em .8em;border-bottom:2px solid var(--tinte)}
+.tab td{padding:.6em .8em;border-bottom:1px solid #c4c4bd;font-size:calc(var(--u)*1.5);vertical-align:top}
+.tab td:first-child{font-family:var(--display);font-weight:800;text-transform:uppercase;font-size:calc(var(--u)*1.8)}
+.tab td:last-child{font-weight:700}
+.tab .alt{color:var(--stahl);text-decoration:line-through;text-decoration-color:var(--signal);text-decoration-thickness:2px}
+
+/* ---------- Business Model Canvas ---------- */
+.bmc{display:grid;grid-template-columns:repeat(10,1fr);grid-template-rows:auto auto auto;gap:0;padding:3px}
+.feld{background:var(--putz);padding:calc(var(--u)*1.3);min-height:calc(var(--u)*13);box-shadow:0 0 0 3px var(--tinte)}
+.feld h3{font-family:var(--mono);font-size:calc(var(--u)*1.1);text-transform:uppercase;letter-spacing:.05em;color:var(--stahl);margin-bottom:.6em;font-weight:600}
+.feld ul{list-style:none;display:grid;gap:.3em}
+.feld li{font-size:calc(var(--u)*1.38);line-height:1.35}
+.feld li b{font-weight:700}
+.f-kp{grid-column:1/3;grid-row:1/3}
+.f-ka{grid-column:3/5;grid-row:1}
+.f-kr{grid-column:3/5;grid-row:2}
+.f-vp{grid-column:5/7;grid-row:1/3;background:var(--zoll)}
+.f-vp h3{color:#5a4600}
+.f-cr{grid-column:7/9;grid-row:1}
+.f-ch{grid-column:7/9;grid-row:2}
+.f-cs{grid-column:9/11;grid-row:1/3}
+.f-c{grid-column:1/6;grid-row:3}
+.f-r{grid-column:6/11;grid-row:3;background:#fff}
+.f-r h3{color:var(--signal)}
+
+/* ---------- Positionierung ---------- */
+.matrix{position:relative;border-left:3px solid var(--tinte);border-bottom:3px solid var(--tinte);height:calc(var(--u)*40);margin-bottom:2.5em}
+.matrix .achse{position:absolute;font-family:var(--mono);font-size:calc(var(--u)*1.15);text-transform:uppercase;color:var(--stahl)}
+.matrix .x{bottom:-2.2em;right:0}.matrix .x0{bottom:-2.2em;left:0}
+.matrix .y{top:0;left:.8em}.matrix .y0{bottom:.6em;left:.8em}
+.punkt{position:absolute;transform:translate(-50%,-50%) scale(.85);font-family:var(--display);font-weight:800;font-size:calc(var(--u)*2.2);text-transform:uppercase;line-height:1.05;text-align:center;
+  opacity:0;transition:opacity .5s,transform .6s cubic-bezier(.2,.8,.2,1)}
+.active .punkt{opacity:1;transform:translate(-50%,-50%)}
+.punkt i{display:block;font-family:var(--body);font-style:normal;font-weight:500;font-size:calc(var(--u)*1.3);text-transform:none;color:var(--stahl);margin-top:.3em}
+.punkt.wir{background:var(--zoll);border:3px solid var(--tinte);padding:.4em .7em;box-shadow:6px 6px 0 var(--tinte)}
+.punkt.wir i{color:var(--tinte)}
+.punkt:nth-of-type(2){transition-delay:.2s}.punkt:nth-of-type(3){transition-delay:.4s}.punkt:nth-of-type(4){transition-delay:.6s}.punkt.wir{transition-delay:1.1s}
+.leer{position:absolute;inset:50% 0 0 50%;z-index:-1;background:repeating-linear-gradient(-45deg,transparent 0 14px,rgba(214,39,24,.08) 14px 16px)}
+
+/* ---------- Edge ---------- */
+.edge{display:grid;grid-template-columns:repeat(2,1fr);gap:calc(var(--u)*2.6) calc(var(--u)*5)}
+.edge > div{border-left:6px solid var(--zoll);padding-left:calc(var(--u)*1.8)}
+.edge .disp{font-size:calc(var(--u)*2.5)}
+.edge p{margin-top:.5em;color:#c9cdd2}
+
+/* ---------- Terminal ---------- */
+.werk{display:grid;grid-template-columns:1fr 1.2fr;gap:calc(var(--u)*5);align-items:center}
+.term{background:#0b0c0e;border:1px solid #2a2d33;border-radius:8px;font-family:var(--mono);font-size:calc(var(--u)*1.4);line-height:1.7;padding:calc(var(--u)*2.2);min-height:calc(var(--u)*34);box-shadow:0 30px 60px -20px rgba(0,0,0,.6)}
+.term .bar{display:flex;gap:6px;margin-bottom:1em}.term .bar i{width:11px;height:11px;border-radius:50%;background:#33363d}
+.term .z{white-space:pre-wrap;min-height:1.7em}
+.term .p{color:var(--zoll)}.term .ok{color:#7fd18b}.term .dim{color:#7b828c}
+.caret{display:inline-block;width:.55em;height:1.1em;background:var(--zoll);vertical-align:-.15em;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.kette{display:flex;flex-direction:column;gap:calc(var(--u)*1.2);margin-top:calc(var(--u)*2.4)}
+.kette div{display:grid;grid-template-columns:8.5em 1fr;gap:1em;align-items:baseline;border-top:1px solid #33363d;padding-top:.6em}
+.kette b{font-family:var(--mono);font-size:calc(var(--u)*1.2);color:var(--zoll);text-transform:uppercase;font-weight:600}
+.kette span{font-size:calc(var(--u)*1.55)}
+
+/* ---------- Team ---------- */
+.team{display:grid;grid-template-columns:repeat(4,1fr);gap:calc(var(--u)*2)}
+.person{border:2px solid var(--tinte);background:#fff;padding:calc(var(--u)*2);display:flex;flex-direction:column;gap:.6em;min-height:calc(var(--u)*20)}
+.person .rolle{font-family:var(--mono);font-size:calc(var(--u)*1.15);text-transform:uppercase;align-self:flex-start;padding:.2em .6em;background:var(--tinte);color:var(--zoll)}
+.person.tech .rolle{background:var(--signal);color:#fff}
+.person.ceo{background:var(--zoll);box-shadow:8px 8px 0 var(--tinte)}
+.person.ceo .rolle{background:var(--tinte);color:#fff}
+.person .name{font-family:var(--display);font-weight:800;font-stretch:118%;font-size:calc(var(--u)*3.6);text-transform:uppercase;line-height:1;margin-top:auto}
+.person p{font-size:calc(var(--u)*1.45)}
+.regel{margin-top:calc(var(--u)*3);display:flex;gap:calc(var(--u)*4);align-items:baseline;border-top:2px solid var(--tinte);padding-top:calc(var(--u)*1.6)}
+.regel .disp{font-size:calc(var(--u)*4.4);white-space:nowrap}
+
+/* ---------- Pakete ---------- */
+.pakete{display:grid;grid-template-columns:repeat(3,1fr);gap:calc(var(--u)*2.4)}
+.paket{border:2px solid var(--tinte);background:#fff;padding:calc(var(--u)*2.4);display:flex;flex-direction:column;gap:.6em}
+.paket.haupt{background:var(--zoll);box-shadow:8px 8px 0 var(--tinte)}
+.paket h3{font-family:var(--mono);font-size:calc(var(--u)*1.3);text-transform:uppercase;letter-spacing:.06em}
+.preis{font-family:var(--display);font-weight:800;font-stretch:112%;font-size:calc(var(--u)*5);line-height:1;white-space:nowrap}
+.preis small{font-size:.34em;font-weight:700;letter-spacing:.02em}
+.paket p{font-size:calc(var(--u)*1.5)}
+.paket .setup{font-family:var(--mono);font-size:calc(var(--u)*1.2);border-top:1px solid currentColor;padding-top:.7em;margin-top:auto}
+
+/* ---------- Einnahmen ---------- */
+.stroeme{display:grid;grid-template-columns:2fr 1fr 1fr;gap:calc(var(--u)*2.4);margin-top:calc(var(--u)*3)}
+.strom{border-top:6px solid var(--tinte);padding-top:calc(var(--u)*1.6)}
+.strom.kern{border-color:var(--signal)}
+.strom .disp{font-size:calc(var(--u)*3.6)}
+.strom p{margin-top:.6em;font-size:calc(var(--u)*1.55)}
+.muster{display:flex;gap:.6em;flex-wrap:wrap}
+.muster span{font-family:var(--mono);font-size:calc(var(--u)*1.15);border:1px solid var(--tinte);padding:.2em .6em;border-radius:99px}
+
+/* ---------- Funnel ---------- */
+.funnel{display:grid;gap:calc(var(--u)*.9);margin-top:calc(var(--u)*2.6)}
+.stufe{display:grid;grid-template-columns:calc(var(--u)*18) 1fr;align-items:center;gap:calc(var(--u)*2)}
+.stufe .balken{height:calc(var(--u)*4.2);background:var(--tinte);color:var(--zoll);display:flex;align-items:center;padding:0 .6em;
+  font-family:var(--display);font-weight:800;font-size:calc(var(--u)*2.6);width:0;min-width:0;transition:width 1.1s cubic-bezier(.2,.8,.2,1)}
+.stufe:last-child .balken{background:var(--signal);color:#fff}
+.stufe label{font-family:var(--mono);font-size:calc(var(--u)*1.25);text-transform:uppercase;text-align:right}
+.active .stufe .balken{width:var(--w);min-width:2.4em}
+.stufe:nth-child(2) .balken{transition-delay:.15s}.stufe:nth-child(3) .balken{transition-delay:.3s}.stufe:nth-child(4) .balken{transition-delay:.45s}
+.orte{display:grid;grid-template-columns:repeat(4,1fr);gap:calc(var(--u)*2);margin-top:calc(var(--u)*3)}
+.orte div{border-left:3px solid var(--tinte);padding-left:.8em;font-size:calc(var(--u)*1.5)}
+.orte b{display:block;font-family:var(--mono);font-size:.8em;text-transform:uppercase;margin-bottom:.2em}
+
+/* ---------- Chart ---------- */
+.zahlen{display:grid;grid-template-columns:1.6fr 1fr;gap:calc(var(--u)*4);align-items:center}
+.chart{width:100%;height:calc(var(--u)*36)}
+.chart text{font-family:var(--mono);font-size:13px;fill:var(--stahl)}
+.chart .linie{fill:none;stroke-width:4;stroke-linejoin:round}
+.chart .geist{fill:none;stroke:var(--stahl);stroke-width:1.5;stroke-dasharray:4 5;opacity:.6}
+.schalter{display:flex;border:2px solid var(--tinte);width:max-content;margin-bottom:calc(var(--u)*2)}
+.schalter button{font:inherit;font-family:var(--mono);font-size:calc(var(--u)*1.25);background:transparent;border:0;padding:.55em 1em;cursor:pointer;text-transform:uppercase;color:var(--tinte)}
+.schalter button[aria-pressed="true"]{background:var(--tinte);color:var(--zoll)}
+.kpis{display:grid;gap:calc(var(--u)*2)}
+.kpi{border-top:2px solid var(--tinte);padding-top:.5em}
+.kpi .wert{font-family:var(--display);font-weight:800;font-size:calc(var(--u)*3.8);line-height:1.05;white-space:nowrap}
+.kpi .wert small{font-size:.5em}
+.kpi label{font-family:var(--mono);font-size:calc(var(--u)*1.15);text-transform:uppercase;color:var(--stahl)}
+
+/* ---------- Unit Economics ---------- */
+.vergleich{display:grid;gap:calc(var(--u)*2.4)}
+.vbalken label{font-family:var(--mono);font-size:calc(var(--u)*1.3);text-transform:uppercase;display:flex;justify-content:space-between;gap:1em}
+.vbalken .b{height:calc(var(--u)*5.6);margin-top:.4em;display:flex;align-items:center;padding:0 .5em;font-family:var(--display);font-weight:800;font-size:calc(var(--u)*3.2);
+  width:0;transition:width 1.3s cubic-bezier(.2,.8,.2,1);white-space:nowrap}
+.vbalken .clv{background:var(--tinte);color:var(--zoll)}
+.vbalken .cac{background:var(--signal);color:#fff}
+.active .vbalken .b{width:var(--w);min-width:max-content}
+.drei{display:grid;grid-template-columns:repeat(3,1fr);gap:calc(var(--u)*3);margin-top:calc(var(--u)*3.4)}
+.drei .disp{font-size:calc(var(--u)*4.6)}
+
+/* ---------- Risiken ---------- */
+.fragen{display:grid;grid-template-columns:1fr 1fr;gap:calc(var(--u)*2.6) calc(var(--u)*5)}
+.frage .disp{font-size:calc(var(--u)*2.3)}
+.frage .disp::before{content:"„"}.frage .disp::after{content:"“"}
+.frage p{margin-top:.5em;font-size:calc(var(--u)*1.55);color:#c9cdd2}
+
+/* ---------- Roadmap / Ask ---------- */
+.strecke{display:grid;grid-template-columns:repeat(4,1fr);margin:calc(var(--u)*2) 0 calc(var(--u)*6)}
+.etappe{border-top:6px solid var(--tinte);padding:calc(var(--u)*1.4) calc(var(--u)*1.6) 0 0;position:relative}
+.etappe::before{content:"";position:absolute;top:-13px;left:0;width:20px;height:20px;border-radius:50%;background:var(--tinte)}
+.etappe.jetzt::before{background:var(--signal);box-shadow:0 0 0 6px rgba(214,39,24,.25)}
+.etappe b{font-family:var(--mono);font-size:calc(var(--u)*1.15);text-transform:uppercase;display:block}
+.etappe span{font-family:var(--display);font-weight:800;font-size:calc(var(--u)*2.2);text-transform:uppercase;line-height:1.1;display:block;margin-top:.3em}
+.ask{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(0,1fr);gap:calc(var(--u)*4);align-items:end}
+.ask h1{font-size:calc(var(--u)*4.9)}
+
+/* ---------- Zollstock (Fortschritt) ---------- */
+.zollstock{position:fixed;left:0;right:0;bottom:0;height:var(--ruler-h);background:var(--tinte);display:flex;align-items:center;padding:0 24px;gap:16px;z-index:5}
+.spur{flex:1;height:28px;position:relative;display:flex;align-items:stretch}
+.spur::before{content:"";position:absolute;inset:0;border:1px dashed #3b3f46;border-radius:2px}
+.seg{position:relative;flex:0 0 7px;height:100%;background:var(--zoll-dk);border:0;border-right:1px solid #7a5d00;cursor:pointer;padding:0;
+  transition:flex-basis .7s cubic-bezier(.6,0,.2,1),background .3s;overflow:hidden}
+.seg.offen{flex-basis:var(--w);background-color:var(--zoll);
+  background-image:linear-gradient(to right,var(--tinte) 1px,transparent 1px),linear-gradient(to right,var(--tinte) 1px,transparent 1px);
+  background-size:calc(var(--w)/20) 28%,calc(var(--w)/2) 55%;background-repeat:repeat-x;background-position:0 0,0 0}
+.seg.offen::after{content:"";position:absolute;right:3px;top:50%;width:6px;height:6px;margin-top:-3px;border-radius:50%;background:#8a8f96;box-shadow:inset 0 0 0 1px #555}
+.seg span{position:absolute;right:12px;bottom:2px;font-family:var(--mono);font-weight:600;font-size:10px;color:var(--tinte);opacity:0;transition:opacity .3s .4s}
+.seg.offen span{opacity:1}
+.seg.meter span{color:var(--signal)}
+.seg.jetzt{background-color:#ffd43b}
+.seg:hover{filter:brightness(1.08)}
+.stand{font-family:var(--mono);font-size:12px;color:#9aa2ad;white-space:nowrap;min-width:12em;text-align:right}
+.stand b{color:var(--zoll);font-weight:600}
+.uhr{position:fixed;top:18px;right:22px;z-index:6;font-family:var(--mono);font-size:15px;background:var(--tinte);color:var(--zoll);padding:.35em .7em;display:none}
+.uhr.an{display:block}.uhr.knapp{color:#fff;background:var(--signal)}
+
+/* ---------- Mobil ---------- */
+@media (max-width:820px){
+  :root{--u:2.6vw}
+  body{padding-bottom:0}
+  .slide{min-height:auto;padding:16vw 16px 12vw}
+  .hero,.kapitel{min-height:100svh}
+  .zollstock,.uhr,.hinweis{display:none}
+  h1,.hero h1{font-size:10.5vw}h2{font-size:8vw}
+  p,li,td,th,.lead,.vp{font-size:16px}
+  .zwei,.werk,.zahlen,.ask,.fragen,.stroeme,.pakete,.drei,.edge{grid-template-columns:1fr}
+  .team,.orte,.strecke,.produkte{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .person .name{font-size:6vw}
+  .disp,h1,h2,.feld li{hyphens:auto;overflow-wrap:break-word}
+  .kapitel{flex-direction:column;align-items:flex-start;justify-content:center}
+  .kapitel .nr{font-size:40vw}.kapitel .disp{font-size:10vw}
+  .kapitel-liste{flex-direction:column}
+  .bmc{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .bmc .feld{grid-column:auto;grid-row:auto;min-height:0}
+  .bmc .f-vp,.bmc .f-cs,.bmc .f-c,.bmc .f-r{grid-column:1/-1}
+  .feld li{font-size:14px}
+  .matrix{height:85vw}
+  .punkt{font-size:4.2vw}
+  .tab td,.tab th{font-size:13px;padding:.4em}
+  .tab td:first-child{font-size:14px}
+  .chart{height:60vw}
+  .stufe{grid-template-columns:30vw 1fr}
+  .schalter{width:auto;flex-wrap:wrap}
+  .schalter button{flex:1 1 auto;font-size:12px}
+  .regel{flex-direction:column;gap:.4em}
+  .ask h1{font-size:8.6vw}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{transition-duration:.01ms!important;transition-delay:0s!important;animation:none!important}
+}
+</style>
+</head>
+<body>
+<div class="uhr" id="uhr" aria-live="off">15:00</div>
+
+<main id="deck">
+
+<!-- ===== Titel ===== -->
+<section class="slide gelb hero" id="start" aria-label="Titel">
+  <div class="mass"><span>BNJS-Interfaces</span><span>Business Model Pitch · Digitale Business Modelle</span></div>
+  <h1>Software für Betriebe, deren Chef <span class="band">auf dem Bau</span> steht.</h1>
+  <div class="unten">
+    <div>
+      <div class="marke">BNJS<span>·</span>Interfaces</div>
+      <ol class="kapitel-liste">
+        <li><a href="#k1"><b>1</b>Die Idee</a></li>
+        <li><a href="#k2"><b>2</b>Canvas &amp; Edge</a></li>
+        <li><a href="#k3"><b>3</b>So verdienen wir Geld</a></li>
+      </ol>
+    </div>
+    <div class="hinweis">Scrollen zum Weiterlesen<br><kbd>T</kbd> 15-Min-Timer · <kbd>F</kbd> Vollbild</div>
+  </div>
+</section>
+
+<!-- ===== Kapitel 1 ===== -->
+<section class="slide nacht kapitel" id="k1" aria-label="Kapitel 1: Die Idee">
+  <div class="nr">1</div>
+  <div>
+    <div class="schritt">Schritt 1 von 3</div>
+    <div class="disp">Die Idee</div>
+    <p>Für wen wir arbeiten, welches Problem wir lösen und was wir anbieten.</p>
+  </div>
+</section>
+
+<section class="slide" aria-label="Kunde und Problem">
+  <div class="mass"><span>Kunde &amp; Problem</span></div>
+  <h2>Markus hat keine Zeit<br>für Digitalisierung.</h2>
+  <div class="zwei">
+    <div class="akte">
+      <span class="tag">Persona · fiktiv</span>
+      <dl>
+        <dt>Wer</dt><dd><b>Markus K., 51</b>, Inhaber eines Elektrobetriebs</dd>
+        <dt>Betrieb</dt><dd>9 Mitarbeitende, Region Bielefeld</dd>
+        <dt>Tag</dt><dd>Ab 6:30 auf der Baustelle, Büro erst nach Feierabend</dd>
+        <dt>Heute</dt><dd>Aufträge auf Zetteln, Angebote in Word, Website von 2014</dd>
+        <dt>Technik</dt><dd>Smartphone ja. Selbst etwas bauen: niemals.</dd>
+      </dl>
+    </div>
+    <div>
+      <p class="zitat">„Ich schreib die Angebote sonntags am Küchentisch.“<small>Job: Aufträge reinholen und abwickeln, ohne Büro-Chaos.</small></p>
+      <ul class="liste">
+        <li><b>Pain:</b> Anfragen gehen verloren, die Website bringt keine Kunden.</li>
+        <li><b>Gain:</b> Alles auf dem Handy, Kunden finden ihn online.</li>
+        <li><b>Und:</b> Keine Agentur ruft ihn an. Für die ist hier zu wenig zu holen.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="slide" aria-label="Was wir anbieten">
+  <div class="mass"><span>Lösung</span></div>
+  <h2>Wir bauen, was der Betrieb braucht.<br><span class="rot">Er muss nichts selbst machen.</span></h2>
+  <div class="produkte">
+    <div class="produkt"><div class="disp">Websites</div><p>Modern, mobil, bei Google sichtbar. Mit Kontaktformular statt Anrufbeantworter.</p></div>
+    <div class="produkt"><div class="disp">CRM</div><p>Kunden, Aufträge, Termine und Angebote als PDF, alles vom Handy aus.</p></div>
+    <div class="produkt"><div class="disp">Apps &amp; ERP</div><p>Logistik-Apps, Kundenportale, KI-Assistenten bis zum kleinen ERP. Je nach Bedarf.</p></div>
+    <div class="produkt ws"><div class="disp">Workshops</div><p>Für alle, die es selbst lernen wollen: wir zeigen, wie man mit KI Software baut.</p></div>
+  </div>
+  <p class="lead" style="margin-top:calc(var(--u)*4)">Sicher, DSGVO-konform, mit Datenspeicherung in der EU. Lokale Betriebe aus jeder Branche, wir starten im Handwerk.</p>
+</section>
+
+<section class="slide" aria-label="Value Proposition">
+  <div class="mass"><span>Value Proposition</span></div>
+  <p class="vp" style="margin-top:calc(var(--u)*2)">
+    <em>Für</em><strong>inhabergeführte Handwerksbetriebe</strong>,
+    <em>die</em>keine Zeit für Digitalisierung haben und von Agenturen ignoriert werden,
+    <em>bietet</em><strong>BNJS-Interfaces Website und CRM zur Miete</strong>,
+    <em>sodass</em>sie <strong>ohne Startinvestition</strong> Aufträge und Kunden digital im Griff haben.
+  </p>
+  <table class="tab">
+    <thead><tr><th>Dimension</th><th>Heute</th><th>Mit uns</th></tr></thead>
+    <tbody>
+      <tr><td>Zeit</td><td class="alt">~5 Std./Woche Büro nach Feierabend</td><td>~1 Std./Woche, Angebote vom Handy</td></tr>
+      <tr><td>Kosten</td><td class="alt">Agentur 1.500–5.000 € einmalig, Branchensoftware 59–89 € pro Nutzer</td><td>20–30 % unter Marktpreis, persönlich betreut</td></tr>
+      <tr><td>Umsatz</td><td class="alt">Anfragen nur per Telefon</td><td>Online-Anfragen rund um die Uhr</td></tr>
+      <tr><td>Risiko</td><td class="alt">Zettel weg, Daten ungesichert</td><td>Gesichert, DSGVO-konform, Speicherung in der EU</td></tr>
+      <tr><td>Qualität</td><td class="alt">Website von 2014, nicht mobil</td><td>Modern, mobil, bei Google sichtbar</td></tr>
+    </tbody>
+  </table>
+  <p class="klein" style="margin-top:.8em">Werte sind Annahmen und werden mit den ersten Pilotkunden geprüft.</p>
+</section>
+
+<!-- ===== Kapitel 2 ===== -->
+<section class="slide nacht kapitel" id="k2" aria-label="Kapitel 2: Business Model Canvas und Edge">
+  <div class="nr">2</div>
+  <div>
+    <div class="schritt">Schritt 2 von 3</div>
+    <div class="disp">Canvas &amp; Edge</div>
+    <p>Unser Geschäftsmodell auf einer Seite und warum wir es besser können als andere.</p>
+  </div>
+</section>
+
+<section class="slide" aria-label="Business Model Canvas">
+  <div class="mass"><span>Business Model Canvas</span></div>
+  <h2>Das ganze Modell auf einer Seite.</h2>
+  <div class="bmc">
+    <div class="feld f-kp"><h3>Schlüsselpartner</h3><ul><li><b>Cloudflare</b>: Hosting, Speicherung in der EU</li><li><b>GitHub</b>: Code &amp; Versionen</li><li><b>KI-Anbieter</b>: Claude Code, Codex</li><li>Innungen &amp; Handwerkskammer</li><li>Großhändler</li><li>Steuerberater</li></ul></div>
+    <div class="feld f-ka"><h3>Schlüsselaktivitäten</h3><ul><li>Vertrieb vor Ort</li><li>KI-gestützte Entwicklung</li><li>Betrieb, Wartung, Updates</li><li>Workshops</li></ul></div>
+    <div class="feld f-kr"><h3>Schlüsselressourcen</h3><ul><li>Team: Vertrieb + Technik</li><li>Know-how Cloudflare &amp; GitHub</li><li>Bausteine, die wir wiederverwenden</li><li>Referenzkunden</li></ul></div>
+    <div class="feld f-vp"><h3>Wertangebot</h3><ul><li><b>Website &amp; CRM zur Miete</b></li><li>Fertig eingerichtet, nichts selbst machen</li><li>Ohne Startinvestition</li><li>DSGVO-konform, Daten in der EU</li><li>Tage statt Wochen</li></ul></div>
+    <div class="feld f-cr"><h3>Kundenbeziehung</h3><ul><li>Persönlich, fester Ansprechpartner</li><li>Änderungen per WhatsApp</li><li>Laufende Betreuung</li></ul></div>
+    <div class="feld f-ch"><h3>Kanäle</h3><ul><li>Direkt im Betrieb</li><li>Großhandel, Innungen</li><li>Empfehlungen</li><li>Eigene Website</li></ul></div>
+    <div class="feld f-cs"><h3>Kundensegmente</h3><ul><li><b>Start: inhabergeführte Handwerksbetriebe in OWL</b></li><li>Danach: Friseure, Imbiss, Kleinbetriebe</li><li>Workshops: technikaffine Selbstständige &amp; Teams</li></ul></div>
+    <div class="feld f-c"><h3>Kostenstruktur</h3><ul><li>Technik ~180 €/Monat: KI-Tools 20–40 € pro Kopf, Cloudflare-Teamaccount ~20 €, GitHub gratis</li><li>Fahrten, Telefon, Versicherung, Steuerberater</li><li>Keine Fixgehälter: Gewinnbeteiligung</li></ul></div>
+    <div class="feld f-r"><h3>Einnahmequellen</h3><ul><li><b>Monatsmiete (Kern)</b>: Ø 163 €</li><li>Einrichtung: Ø 960 € einmalig</li><li>Workshops: 290 € pro Person</li><li>Individuelle Projekte</li></ul></div>
+  </div>
+</section>
+
+<section class="slide" aria-label="Markt und Wettbewerb">
+  <div class="mass"><span>Markt &amp; Wettbewerb</span></div>
+  <h2>Zu klein für Agenturen.<br><span class="rot">Zu beschäftigt</span> für Baukästen.</h2>
+  <div class="matrix">
+    <span class="achse y">Teuer</span><span class="achse y0">Günstig</span>
+    <span class="achse x0">Selbst machen</span><span class="achse x">Machen lassen →</span>
+    <div class="punkt" style="left:80%;top:18%">Agentur<i>1.500–5.000 € pro Website, Kleinbetrieb uninteressant</i></div>
+    <div class="punkt" style="left:52%;top:46%">Freelancer<i>Einzelprojekt, danach weg</i></div>
+    <div class="punkt" style="left:22%;top:30%">Branchensoftware<i>59–89 € pro Nutzer, selbst einrichten</i></div>
+    <div class="punkt" style="left:18%;top:76%">Wix · Jimdo<i>Ab 9 €/Monat, aber: selbst bauen</i></div>
+    <div class="punkt wir" style="left:77%;top:74%">BNJS-Interfaces<i>Wir bauen. Er zahlt Miete.</i></div>
+    <div class="leer" aria-hidden="true"></div>
+  </div>
+</section>
+
+<section class="slide nacht" aria-label="Unsere Edge">
+  <div class="mass"><span>Unsere Edge</span></div>
+  <h2>Warum das nicht<br><span class="band" style="color:var(--tinte)">jeder</span> kann.</h2>
+  <div class="edge">
+    <div><div class="disp">Wir gehen hin.</div><p>Agenturen warten auf Anfragen, Baukästen auf Klicks. Wir stehen morgens beim Großhändler und im Betrieb. Dort sind die Kunden, die sonst niemand anspricht.</p></div>
+    <div><div class="disp">Wir beherrschen die Infrastruktur.</div><p>KI schreibt Code, aber Cloudflare, GitHub, Deployments, Datenbanken, Zugriffsrechte und Backups sauber aufzusetzen ist Fachwissen. Genau das macht eine App sicher und betriebsbereit.</p></div>
+    <div><div class="disp">Wir sind günstiger, ohne draufzuzahlen.</div><p>Unsere gesamte Technik kostet rund 180 € im Monat. Deshalb liegen wir 20–30 % unter dem Marktpreis und verdienen trotzdem gut. Billig sind wir nicht.</p></div>
+    <div><div class="disp">Wir bleiben.</div><p>Miete statt Projekt heißt: Wir betreuen den Betrieb dauerhaft. Freelancer liefern einmal und sind weg.</p></div>
+  </div>
+</section>
+
+<section class="slide nacht" aria-label="Wie wir bauen">
+  <div class="mass"><span>Edge in der Praxis</span></div>
+  <div class="werk">
+    <div>
+      <h2>Tage statt<br>Wochen.</h2>
+      <p class="lead">KI schreibt den Code, wir prüfen, testen, betreiben und verantworten ihn.</p>
+      <div class="kette">
+        <div><b>Bauen</b><span>Claude Code &amp; Codex, geprüft von uns</span></div>
+        <div><b>Versionieren</b><span>GitHub: jede Änderung nachvollziehbar, Rechte sauber getrennt</span></div>
+        <div><b>Betreiben</b><span>Cloudflare: schnell, günstig, Datenspeicherung in der EU</span></div>
+      </div>
+    </div>
+    <div class="term" aria-label="Beispiel einer Entwicklungssitzung">
+      <div class="bar"><i></i><i></i><i></i></div>
+      <div id="term"></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" aria-label="Team">
+  <div class="mass"><span>Schlüsselressource: Team</span></div>
+  <h2>Vier Leute. Jung, hungrig,<br>Vollzeit dabei.</h2>
+  <div class="team">
+    <div class="person ceo"><span class="rolle">CEO</span><p>Strategie, Finanzen, Kunden. Springt überall ein, wo es brennt.</p><div class="name">Sandro</div></div>
+    <div class="person"><span class="rolle">Vertrieb</span><p>Akquise vor Ort, Demos, Kundenbeziehung.</p><div class="name">Julian</div></div>
+    <div class="person"><span class="rolle">Vertrieb</span><p>Großhandel, Innungen, Netzwerk, Workshops.</p><div class="name">Niels</div></div>
+    <div class="person tech"><span class="rolle">Technik</span><p>KI-Entwicklung, Cloudflare, GitHub, Sicherheit.</p><div class="name">Ben</div></div>
+  </div>
+  <div class="regel">
+    <div class="disp">50 / 50</div>
+    <p>Wer verkauft und wer baut, teilt den Gewinn eines Projekts. Wer allein liefert, bekommt 100 %. Ausgezahlt wird nur, was nach allen Kosten übrig bleibt.</p>
+  </div>
+</section>
+
+<!-- ===== Kapitel 3 ===== -->
+<section class="slide nacht kapitel" id="k3" aria-label="Kapitel 3: So verdienen wir Geld">
+  <div class="nr">3</div>
+  <div>
+    <div class="schritt">Schritt 3 von 3</div>
+    <div class="disp">So verdienen wir Geld</div>
+    <p>Preise, Einnahmen, Vertrieb und die Zahlen für drei Jahre.</p>
+  </div>
+</section>
+
+<section class="slide" aria-label="Preise">
+  <div class="mass"><span>Preise</span></div>
+  <h2>20–30 % unter Marktpreis.<br><span class="rot">Nicht für lau.</span></h2>
+  <p class="lead" style="margin-bottom:calc(var(--u)*3.4)">Wir bauen, hosten und pflegen. Der Betrieb mietet zum festen Monatsbetrag oder kauft einmalig und zahlt nur die Betreuung.</p>
+  <div class="pakete">
+    <div class="paket">
+      <h3>Website</h3>
+      <div class="preis">99 €<small> /Monat</small></div>
+      <p>Moderne, mobile Website mit Kontaktformular und Google-Profil. Oder als One-Pager kaufen: <b>590 €</b> einmalig + 39 €/Monat Betreuung.</p>
+      <div class="setup">Einrichtung 290 € · Markt: ~129 €/Monat + 490 € bzw. One-Pager ab 800 €</div>
+    </div>
+    <div class="paket haupt">
+      <h3>Website + CRM</h3>
+      <div class="preis">229 €<small> /Monat</small></div>
+      <p>Kunden, Aufträge, Termine und Angebote als PDF, alles vom Handy aus. Zugeschnitten auf den Betrieb, inklusive 3 Nutzer.</p>
+      <div class="setup">Einrichtung 990 € · Markt: Website-Abo + Branchensoftware ~310 €/Monat</div>
+    </div>
+    <div class="paket">
+      <h3>Individuell</h3>
+      <div class="preis"><small>ab </small>349 €<small> /Monat</small></div>
+      <p>Logistik-App, Kundenportal, KI-Assistent bis hin zum kleinen ERP: was der Betrieb braucht.</p>
+      <div class="setup">Einrichtung ab 4.900 € · 20–30 % unter Agenturangebot</div>
+    </div>
+  </div>
+  <p class="klein" style="margin-top:1.2em">Marktpreise: öffentliche Preisangaben von Agenturen, Website-Abo-Anbietern und Handwerkersoftware (HERO, ToolTime, plancraft), Stand 2026. Alle Preise netto.</p>
+</section>
+
+<section class="slide" aria-label="Einnahmequellen">
+  <div class="mass"><span>Einnahmequellen</span></div>
+  <h2>Jeder Kunde zahlt<br><span class="band">jeden Monat</span>.</h2>
+  <div class="muster"><span>Muster: Subscription</span><span>Rent instead of Buy</span><span>Solution Provider</span></div>
+  <div class="stroeme">
+    <div class="strom kern">
+      <div class="disp">Miete<br>Ø 163 € / Monat</div>
+      <p><b>Kern des Modells.</b> Hosting, Wartung, Updates und kleine Änderungen sind inklusive. Wiederkehrend und planbar.</p>
+    </div>
+    <div class="strom">
+      <div class="disp">Einrichtung<br>Ø 960 €</div>
+      <p>Einmalig je Kunde, deckt den Aufbau. Dazu kommen Website-Käufe ohne Miete.</p>
+    </div>
+    <div class="strom">
+      <div class="disp">Workshops<br>290 €</div>
+      <p>Pro Person, für technikaffine Selbstständige und Teams. Zweites Standbein.</p>
+    </div>
+  </div>
+</section>
+
+<section class="slide" aria-label="Vertrieb">
+  <div class="mass"><span>So kommt das Geld rein</span></div>
+  <h2>Wir warten nicht auf Klicks.<br><span class="rot">Wir klingeln.</span></h2>
+  <p class="lead">Julian und Niels, Vollzeit im Vertrieb. Ziel: <b>10 Abschlüsse pro Kopf und Monat.</b></p>
+  <div class="funnel">
+    <div class="stufe"><label>Gespräche / Woche</label><div class="balken" style="--w:100%">100</div></div>
+    <div class="stufe"><label>Demos / Woche</label><div class="balken" style="--w:20%">20</div></div>
+    <div class="stufe"><label>Abschlüsse / Woche</label><div class="balken" style="--w:5%">5</div></div>
+    <div class="stufe"><label>Neukunden / Monat</label><div class="balken" style="--w:20%">20</div></div>
+  </div>
+  <div class="orte">
+    <div><b>Vor Ort</b>Direkt in den Betrieb, mit Demo auf dem Tablet</div>
+    <div><b>Großhandel</b>Morgens um 7 an der Theke, da stehen die Chefs</div>
+    <div><b>Innungen</b>Handwerkskammer, Stammtische, Verbände</div>
+    <div><b>Empfehlung</b>Ein Elektriker kennt zehn andere Handwerker</div>
+  </div>
+</section>
+
+<section class="slide" aria-label="Zahlen">
+  <div class="mass"><span>Planung · 3 Jahre</span></div>
+  <h2>Die Miete wächst mit jedem Kunden.</h2>
+  <div class="schalter" role="group" aria-label="Szenario">
+    <button type="button" data-s="10">Vorsichtig · 10/Monat</button>
+    <button type="button" data-s="20" aria-pressed="true">Ziel · 20/Monat</button>
+    <button type="button" data-s="30">Ehrgeizig · 30/Monat</button>
+  </div>
+  <div class="zahlen">
+    <svg class="chart" id="chart" viewBox="0 0 820 340" preserveAspectRatio="none" role="img" aria-label="Monatliche Mieteinnahmen über 36 Monate"></svg>
+    <div class="kpis">
+      <div class="kpi"><label>Kunden Ende Jahr 3</label><div class="wert" id="k-kunden">–</div></div>
+      <div class="kpi"><label>Miete pro Monat, Ende Jahr 3</label><div class="wert" id="k-mrr">–</div></div>
+      <div class="kpi"><label>Gewinn pro Kopf / Monat, J1 → J3</label><div class="wert" id="k-kopf">–</div></div>
+    </div>
+  </div>
+  <p class="klein" style="margin-top:1em">Annahmen: Kundenmix 60 % Website, 30 % Website + CRM, 10 % individuell → Ø 163 € Miete, Ø 960 € Einrichtung. 2 % Kündigungen/Monat, 1 Workshop/Monat mit 6 Personen. Kosten: ~1.100 €/Monat fix (Technik ~180 €, Fahrten, Telefon, Versicherung, Steuerberater), ~1 €/Kunde/Monat, je 150 Kunden eine zusätzliche Stelle (60 T€/Jahr). Vor Steuern und Krankenversicherung.</p>
+</section>
+
+<section class="slide" aria-label="Unit Economics">
+  <div class="mass"><span>Unit Economics</span></div>
+  <h2>Ein Kunde bringt<br><span class="band">9- bis 18-mal</span> mehr, als er kostet.</h2>
+  <div class="vergleich">
+    <div class="vbalken"><label><span>Kundenwert (CLV)</span><span>163 € × ~50 Monate + Einrichtung</span></label><div class="b clv" style="--w:100%">≈ 9.100 €</div></div>
+    <div class="vbalken"><label><span>Akquisekosten (CAC)</span><span>Vertriebszeit pro Abschluss</span></label><div class="b cac" style="--w:11%">500–1.000 €</div></div>
+  </div>
+  <div class="drei">
+    <div><div class="disp">7</div><p>Kunden decken alle laufenden Fixkosten von ~1.100 € im Monat.</p></div>
+    <div><div class="disp">~180 €</div><p>Technik im Monat für das ganze Team: KI-Tools, Cloudflare. GitHub ist gratis.</p></div>
+    <div><div class="disp">0 €</div><p>Fremdkapital nötig. Wir wachsen aus eigener Kraft.</p></div>
+  </div>
+</section>
+
+<section class="slide nacht" aria-label="Risiken">
+  <div class="mass"><span>Risiken &amp; Antworten</span></div>
+  <h2>Die Fragen, die ihr<br>gleich stellen wollt.</h2>
+  <div class="fragen">
+    <div class="frage"><div class="disp">Das kann doch jetzt jeder mit KI.</div><p>Code schreiben vielleicht. Cloudflare, GitHub und den sicheren Betrieb aufsetzen nicht. Und niemand außer uns fährt zum Elektriker und betreut ihn danach.</p></div>
+    <div class="frage"><div class="disp">Und wenn die Kunden kündigen?</div><p>Kunden, Aufträge und Abläufe liegen im System, ein Wechsel ist aufwendig. Wir planen trotzdem vorsichtig mit 2 % Kündigungen pro Monat.</p></div>
+    <div class="frage"><div class="disp">DSGVO mit einem US-Anbieter?</div><p>Datenschutz und Recht kennen wir: Speicherung in der EU, Auftragsverarbeitungsvertrag, EU-Standardvertragsklauseln. Steuern macht von Anfang an ein Steuerberater.</p></div>
+    <div class="frage"><div class="disp">Was, wenn der Support explodiert?</div><p>Wiederverwendbare Bausteine statt Einzelanfertigungen. Je 150 Kunden stellen wir eine weitere Kraft für Technik und Support ein, bezahlt aus der Miete.</p></div>
+  </div>
+</section>
+
+<section class="slide gelb" aria-label="Roadmap und Bitte">
+  <div class="mass"><span>Roadmap &amp; Ask</span></div>
+  <div class="strecke">
+    <div class="etappe jetzt"><b>Start</b><span>Handwerk in Bielefeld</span></div>
+    <div class="etappe"><b>Danach</b><span>Friseure, Imbiss, Kleinbetriebe</span></div>
+    <div class="etappe"><b>Dann</b><span>Ganz OWL</span></div>
+    <div class="etappe"><b>Später</b><span>Partner-Vertrieb in weiteren Regionen</span></div>
+  </div>
+  <div class="ask">
+    <h1>Kennt ihr einen <span class="band">Handwerker?</span></h1>
+    <div>
+      <p class="lead">Wir suchen <b>10 Pilotkunden</b>, die Website oder CRM drei Monate testen. Und wir wollen eure Stimme beim Voting.</p>
+      <p class="marke" style="margin-top:1em">BNJS<span>·</span>Interfaces</p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<nav class="zollstock" aria-label="Abschnitte">
+  <div class="spur" id="spur"></div>
+  <div class="stand" id="stand"></div>
+</nav>
+
+<script>
+(() => {
+  const slides = [...document.querySelectorAll('.slide')];
+  const N = slides.length, CM = 20; // jeder Abschnitt = ein Zollstock-Glied à 20 cm
+  const spur = document.getElementById('spur'), stand = document.getElementById('stand');
+  const ruhig = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Maßangabe pro Abschnitt
+  slides.forEach((s, i) => {
+    const m = s.querySelector('.mass');
+    if (m) m.insertAdjacentHTML('afterbegin', `<b>${(i + 1) * CM} cm</b>`);
+  });
+
+  // Elemente für die Eingangsanimation markieren, Gruppen gestaffelt
+  const gruppen = '.produkte,.team,.bmc,.fragen,.stroeme,.orte,.strecke,.drei,.edge,.pakete,.liste,.kpis,.kapitel-liste,.funnel,.vergleich,.tab tbody';
+  slides.forEach(s => {
+    let d = 0;
+    [...s.children].forEach(el => {
+      if (el.matches('.mass')) { el.classList.add('rv'); return; }
+      const g = el.matches(gruppen) ? el : el.querySelector(':scope > ' + gruppen.split(',').join(', :scope > '));
+      if (el.matches(gruppen)) {
+        [...el.children].forEach((c, k) => { c.classList.add('rv'); c.style.setProperty('--d', (d + k * 0.12) + 's'); });
+      } else {
+        el.classList.add('rv'); el.style.setProperty('--d', d + 's');
+        el.querySelectorAll(':scope ' + gruppen.split(',').join(', :scope ')).forEach(gr =>
+          [...gr.children].forEach((c, k) => { c.classList.add('rv'); c.style.setProperty('--d', (d + 0.2 + k * 0.12) + 's'); }));
+      }
+      d += 0.12;
+    });
+  });
+  // Sichtbarkeit beim Scrollen prüfen (robuster als IntersectionObserver in eingebetteten Ansichten)
+  let offen = [...document.querySelectorAll('.rv')];
+  const wartend = new Set(slides);
+  function sichtbar() {
+    const h = innerHeight;
+    offen = offen.filter(el => {
+      const r = el.getBoundingClientRect();
+      if (r.top < h * 0.94 && r.bottom > 0) { el.classList.add('in'); return false; }
+      return true;
+    });
+    wartend.forEach(s => {
+      const r = s.getBoundingClientRect();
+      if (r.top < h * 0.65 && r.bottom > h * 0.2) { s.classList.add('active'); wartend.delete(s); onEnter(s); }
+    });
+  }
+  let rafAn = false;
+  const plane = () => { if (!rafAn) { rafAn = true; requestAnimationFrame(() => { rafAn = false; sichtbar(); fortschritt(); }); } };
+  addEventListener('scroll', plane, { passive: true });
+  addEventListener('resize', plane);
+
+  // Zollstock: Fortschritt beim Scrollen
+  const segs = slides.map((s, i) => {
+    const b = document.createElement('button');
+    b.className = 'seg' + (((i + 1) * CM) % 100 === 0 ? ' meter' : '');
+    b.type = 'button';
+    b.setAttribute('aria-label', `Zu Abschnitt ${i + 1}: ${s.getAttribute('aria-label')}`);
+    b.innerHTML = `<span>${(i + 1) * CM}</span>`;
+    b.onclick = () => s.scrollIntoView({ behavior: ruhig ? 'auto' : 'smooth' });
+    spur.appendChild(b);
+    return b;
+  });
+  const setW = () => spur.style.setProperty('--w', (spur.clientWidth / N) + 'px');
+  setW(); addEventListener('resize', setW);
+  let cur = -1;
+  function fortschritt() {
+    const mitte = innerHeight * 0.45;
+    let i = 0;
+    slides.forEach((s, j) => { if (s.getBoundingClientRect().top <= mitte) i = j; });
+    if (i === cur) return;
+    cur = i;
+    segs.forEach((b, j) => { b.classList.toggle('offen', j <= i); b.classList.toggle('jetzt', j === i); });
+    const kap = i >= slides.indexOf(document.getElementById('k3')) ? 'Kapitel 3' : i >= slides.indexOf(document.getElementById('k2')) ? 'Kapitel 2' : i >= 1 ? 'Kapitel 1' : 'Start';
+    stand.innerHTML = `${kap} · <b>${(i + 1) * CM} cm</b> / ${N * CM}`;
+  }
+
+  // Tasten: Timer und Vollbild
+  addEventListener('keydown', e => {
+    if (e.key.toLowerCase() === 't') uhr();
+    else if (e.key.toLowerCase() === 'f') document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen?.();
+  });
+
+  // 15-Minuten-Timer für den Pitch
+  let uhrT = null;
+  function uhr() {
+    const el = document.getElementById('uhr');
+    if (uhrT) { clearInterval(uhrT); uhrT = null; el.classList.remove('an', 'knapp'); return; }
+    const ende = Date.now() + 15 * 60 * 1000;
+    el.classList.add('an');
+    const tick = () => {
+      const r = Math.max(0, Math.round((ende - Date.now()) / 1000));
+      el.textContent = `${String(Math.floor(r / 60)).padStart(2, '0')}:${String(r % 60).padStart(2, '0')}`;
+      el.classList.toggle('knapp', r <= 120);
+    };
+    tick(); uhrT = setInterval(tick, 1000);
+  }
+
+  // Terminal-Animation
+  const zeilen = [
+    ['p', '$ claude "CRM für Elektro Krüger: Kunden, Aufträge, Angebote als PDF"'],
+    ['dim', '  Lese Anforderungen … plane Datenmodell …'],
+    ['ok', '✓ Datenmodell: Kunden · Aufträge · Termine · Angebote'],
+    ['ok', '✓ Oberfläche: mobil, Angebot in 3 Klicks vom Handy'],
+    ['ok', '✓ Tests: 42 von 42 bestanden'],
+    ['p', '$ git push origin main'],
+    ['dim', '  Review durch Ben · freigegeben'],
+    ['p', '$ wrangler deploy'],
+    ['ok', '✓ Live auf Cloudflare · Datenspeicherung: EU'],
+  ];
+  function terminal() {
+    const box = document.getElementById('term');
+    box.innerHTML = '';
+    if (ruhig) { box.innerHTML = zeilen.map(([c, t]) => `<div class="z ${c}">${t}</div>`).join(''); return; }
+    let z = 0;
+    const naechste = () => {
+      if (z >= zeilen.length) { box.insertAdjacentHTML('beforeend', '<div class="z p">$ <span class="caret"></span></div>'); return; }
+      const [c, t] = zeilen[z++];
+      const div = document.createElement('div'); div.className = 'z ' + c; box.appendChild(div);
+      if (c === 'p') {
+        let k = 0;
+        const tipp = () => { div.textContent = t.slice(0, ++k); k < t.length ? setTimeout(tipp, 22) : setTimeout(naechste, 350); };
+        tipp();
+      } else { div.textContent = t; setTimeout(naechste, 420); }
+    };
+    setTimeout(naechste, 700);
+  }
+
+  // Planungsmodell
+  const MIETE = 163, SETUP = 960, CHURN = 0.02, WS = 12 * 6 * 290;
+  function modell(neu) {
+    let c = 0; const monate = [], jahre = [];
+    for (let y = 1; y <= 3; y++) {
+      let rec = 0, setup = 0;
+      for (let m = 0; m < 12; m++) { c = c * (1 - CHURN) + neu; rec += c * MIETE; setup += neu * SETUP; monate.push(c * MIETE); }
+      // ~1.100 €/Monat fix (+3 T€ pro Jahr) + 1 €/Kunde/Monat + je 150 Kunden eine zusätzliche Stelle (60 T€/Jahr)
+      const kosten = 13200 + 3000 * (y - 1) + c * 12 + Math.floor(c / 150) * 60000;
+      jahre.push({ kunden: c, gewinn: rec + setup + WS - kosten });
+    }
+    return { monate, jahre };
+  }
+  const fmt = n => Math.round(n).toLocaleString('de-DE');
+  let szenario = 20;
+  function chart(anim) {
+    const svg = document.getElementById('chart');
+    const W = 820, H = 340, L = 64, R = 20, T = 16, B = 34, MAX = 140000;
+    const x = i => L + (W - L - R) * (i / 35), y = v => T + (H - T - B) * (1 - v / MAX);
+    const pfad = arr => arr.map((v, i) => (i ? 'L' : 'M') + x(i).toFixed(1) + ' ' + y(v).toFixed(1)).join(' ');
+    let s = '';
+    for (let v = 0; v <= MAX; v += 20000) s += `<line x1="${L}" x2="${W - R}" y1="${y(v)}" y2="${y(v)}" stroke="#c4c4bd" stroke-width="1"/><text x="${L - 10}" y="${y(v) + 4}" text-anchor="end">${v / 1000}k €</text>`;
+    [0, 12, 24].forEach((m, k) => s += `<line x1="${x(m)}" x2="${x(m)}" y1="${T}" y2="${H - B}" stroke="#c4c4bd" stroke-dasharray="3 4"/><text x="${x(m + 6)}" y="${H - 10}" text-anchor="middle">Jahr ${k + 1}</text>`);
+    [10, 20, 30].filter(n => n !== szenario).forEach(n => s += `<path class="geist" d="${pfad(modell(n).monate)}"/>`);
+    const m = modell(szenario).monate;
+    s += `<path d="${pfad(m)} L ${x(35)} ${y(0)} L ${x(0)} ${y(0)} Z" fill="rgba(244,194,27,.35)"/>`;
+    s += `<path class="linie" id="hauptlinie" d="${pfad(m)}" stroke="#141518"/>`;
+    s += `<circle cx="${x(35)}" cy="${y(m[35])}" r="7" fill="#D62718"/>`;
+    s += `<text x="${x(35) - 12}" y="${y(m[35]) - 14}" text-anchor="end" style="fill:#141518;font-weight:600;font-size:15px">${fmt(m[35])} € / Monat</text>`;
+    svg.innerHTML = s;
+    const ln = document.getElementById('hauptlinie');
+    if (anim && !ruhig) {
+      const len = ln.getTotalLength();
+      ln.style.strokeDasharray = len; ln.style.strokeDashoffset = len;
+      ln.getBoundingClientRect();
+      ln.style.transition = 'stroke-dashoffset 1.6s cubic-bezier(.4,0,.2,1)'; ln.style.strokeDashoffset = 0;
+    }
+    const j = modell(szenario).jahre;
+    document.getElementById('k-kunden').textContent = fmt(j[2].kunden);
+    document.getElementById('k-mrr').innerHTML = fmt(m[35]) + '<small> €</small>';
+    document.getElementById('k-kopf').innerHTML = fmt(j[0].gewinn / 48) + ' → ' + fmt(j[2].gewinn / 48) + '<small> €</small>';
+  }
+  document.querySelectorAll('.schalter button').forEach(b => b.onclick = () => {
+    szenario = +b.dataset.s;
+    document.querySelectorAll('.schalter button').forEach(o => o.setAttribute('aria-pressed', o === b));
+    chart(true);
+  });
+  chart(false);
+
+  function onEnter(s) {
+    if (s.querySelector('#term')) terminal();
+    if (s.querySelector('#chart')) chart(true);
+  }
+
+  sichtbar(); fortschritt();
+  setTimeout(sichtbar, 300);
+})();
+</script>
+</body>
+</html>
