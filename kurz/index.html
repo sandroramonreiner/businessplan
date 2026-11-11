@@ -16,11 +16,11 @@
   --display:"Archivo",Impact,sans-serif; --body:"Hanken Grotesk",system-ui,sans-serif; --mono:"JetBrains Mono",ui-monospace,monospace;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-html{scroll-snap-type:y mandatory;scroll-behavior:smooth}
+html{scroll-behavior:smooth}
 body{background:var(--putz);color:var(--tinte);font-family:var(--body);-webkit-font-smoothing:antialiased;overflow-x:clip}
 :focus-visible{outline:3px solid var(--signal);outline-offset:3px}
 
-.folie{min-height:100vh;scroll-snap-align:start;padding:calc(var(--u)*3.2) calc(var(--u)*5) calc(var(--u)*3.2);display:flex;flex-direction:column;gap:calc(var(--u)*1.8)}
+.folie{min-height:100vh;padding:calc(var(--u)*3.2) calc(var(--u)*5) calc(var(--u)*3.2);display:flex;flex-direction:column;gap:calc(var(--u)*1.3)}
 .folie.gelb{background:var(--zoll)}
 .kopf{display:flex;align-items:center;gap:1.2em;font-family:var(--mono);font-size:calc(var(--u)*1.25);text-transform:uppercase;letter-spacing:.05em}
 .kopf .nr{background:var(--tinte);color:var(--zoll);padding:.3em .7em;font-weight:600}
@@ -30,7 +30,7 @@ body{background:var(--putz);color:var(--tinte);font-family:var(--body);-webkit-f
 .gelb .kopf .rechts{color:#5a4600}
 h1,h2,.disp{font-family:var(--display);font-weight:800;font-stretch:112%;text-transform:uppercase;line-height:1.04;letter-spacing:-.01em}
 h1{font-size:calc(var(--u)*4.2)}
-h2{font-size:calc(var(--u)*2.9)}
+h2{font-size:calc(var(--u)*2.5)}
 p,li{font-size:calc(var(--u)*1.45);line-height:1.38}
 .band{background:var(--tinte);color:var(--zoll);padding:0 .12em}
 .klein{font-size:calc(var(--u)*1.2);color:var(--stahl)}
@@ -43,7 +43,7 @@ ul{list-style:none}
 .spalten .problem h3{border-color:var(--signal)}
 .spalten li{padding-left:1.2em;position:relative;margin-bottom:.35em}
 .spalten li::before{content:"";position:absolute;left:0;top:.65em;width:.6em;height:3px;background:var(--tinte)}
-.marke{display:flex;flex-direction:column;align-items:center;gap:calc(var(--u)*1.8)}
+.marke{display:flex;flex-direction:column;align-items:center;gap:calc(var(--u)*1.3)}
 .marke svg{width:min(100%,calc(var(--u)*18));filter:drop-shadow(9px 9px 0 var(--tinte))}
 .wortmarke{text-align:center}
 .wortmarke b{display:block;font-family:var(--display);font-weight:900;font-stretch:125%;font-size:calc(var(--u)*3);line-height:1;text-transform:uppercase}
@@ -54,19 +54,35 @@ ul{list-style:none}
 
 /* ---------- Folie 2: Business Model Canvas ---------- */
 .bmc{flex:1;display:grid;grid-template-columns:repeat(10,minmax(0,1fr));grid-template-rows:1fr 1fr auto;padding:3px}
-.feld{background:var(--putz);box-shadow:0 0 0 3px var(--tinte);padding:calc(var(--u)*.9) calc(var(--u)*1.2)}
-.feld h3{font-family:var(--mono);font-size:calc(var(--u)*1);text-transform:uppercase;letter-spacing:.05em;color:var(--stahl);margin-bottom:.6em;font-weight:600}
-.feld li{font-size:calc(var(--u)*1.28);line-height:1.28;margin-bottom:.2em}
+.feld{background:var(--putz);box-shadow:0 0 0 3px var(--tinte);padding:calc(var(--u)*.7) calc(var(--u)*1.1)}
+.feld h3{font-family:var(--mono);font-size:calc(var(--u)*1);text-transform:uppercase;letter-spacing:.05em;color:var(--stahl);margin-bottom:.4em;font-weight:600}
+.feld li{font-size:calc(var(--u)*1.17);line-height:1.25;margin-bottom:.15em}
 .feld li b{font-weight:700}
 .f-kp{grid-column:1/3;grid-row:1/3}.f-ka{grid-column:3/5;grid-row:1}.f-kr{grid-column:3/5;grid-row:2}
 .f-vp{grid-column:5/7;grid-row:1/3;background:var(--zoll)}.f-vp h3{color:#5a4600}
 .f-cr{grid-column:7/9;grid-row:1}.f-ch{grid-column:7/9;grid-row:2}.f-cs{grid-column:9/11;grid-row:1/3}
 .f-c{grid-column:1/6;grid-row:3}.f-r{grid-column:6/11;grid-row:3;background:#fff}.f-r h3{color:var(--signal)}
 .usp{display:grid;grid-template-columns:auto repeat(4,minmax(0,1fr));gap:calc(var(--u)*1.6);align-items:stretch}
-.usp .label{font-family:var(--display);font-weight:900;font-stretch:125%;font-size:calc(var(--u)*2.6);background:var(--tinte);color:var(--zoll);display:flex;align-items:center;padding:0 .6em}
+.usp .label{font-family:var(--display);font-weight:900;font-stretch:125%;font-size:calc(var(--u)*2.1);background:var(--tinte);color:var(--zoll);display:flex;align-items:center;padding:0 .6em}
 .usp div:not(.label){border-left:4px solid var(--zoll);padding:.2em 0 .2em .8em}
-.usp b{display:block;font-family:var(--display);font-weight:800;text-transform:uppercase;font-size:calc(var(--u)*1.55)}
-.usp span{font-size:calc(var(--u)*1.3);color:var(--stahl)}
+.usp b{display:block;font-family:var(--display);font-weight:800;text-transform:uppercase;font-size:calc(var(--u)*1.35)}
+.usp span{font-size:calc(var(--u)*1.15);color:var(--stahl)}
+.muster{display:grid;grid-template-columns:minmax(0,1.15fr) repeat(4,minmax(0,1fr));gap:calc(var(--u)*1);align-items:stretch}
+.muster .label{background:var(--signal);color:#fff;font-family:var(--mono);font-size:calc(var(--u)*1.05);text-transform:uppercase;letter-spacing:.03em;line-height:1.3;padding:.5em .7em;display:flex;flex-direction:column;justify-content:center}
+.muster .label small{opacity:.8}
+.muster div:not(.label){border:2px solid var(--tinte);background:#fff;padding:.35em .7em}
+.muster b{display:block;font-family:var(--mono);font-weight:600;font-size:calc(var(--u)*1.2);text-transform:uppercase}
+.muster span{font-size:calc(var(--u)*1.15);color:var(--stahl);line-height:1.25;display:block}
+
+/* St. Galler Magisches Dreieck (Folie 3) */
+.dreieck{display:grid;grid-template-columns:auto repeat(4,minmax(0,1fr));gap:calc(var(--u)*1);align-items:stretch}
+.dreieck .label{display:flex;align-items:center;gap:.6em;font-family:var(--mono);font-size:calc(var(--u)*1.05);text-transform:uppercase;line-height:1.25;padding-right:.4em}
+.dreieck .label svg{width:calc(var(--u)*4.2);flex:none}
+.dreieck div:not(.label){border-top:4px solid var(--tinte);padding-top:.35em}
+.dreieck b{display:block;font-family:var(--display);font-weight:800;text-transform:uppercase;font-size:calc(var(--u)*1.5)}
+.dreieck span{font-size:calc(var(--u)*1.2);color:var(--stahl);line-height:1.25;display:block}
+.dreieck .wert{border-color:var(--signal)!important;background:var(--zoll);padding:.35em .7em .4em!important}
+.dreieck .wert span{color:var(--tinte)}
 
 /* ---------- Folie 3: Erlösmodell ---------- */
 .erloes{flex:1;display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:calc(var(--u)*4)}
@@ -74,14 +90,14 @@ ul{list-style:none}
 .paket{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:1em;border:2px solid var(--tinte);background:#fff;padding:calc(var(--u)*.9) calc(var(--u)*1.4)}
 .paket.haupt{background:var(--zoll);box-shadow:7px 7px 0 var(--tinte)}
 .paket h3{font-family:var(--mono);font-size:calc(var(--u)*1.2);text-transform:uppercase;letter-spacing:.05em}
-.paket p{font-size:calc(var(--u)*1.3)}
+.paket p{font-size:calc(var(--u)*1.18)}
 .paket .markt{font-family:var(--mono);font-size:calc(var(--u)*1.1);color:var(--stahl);margin-top:.3em}
-.preis{font-family:var(--display);font-weight:800;font-stretch:112%;font-size:calc(var(--u)*3);white-space:nowrap;text-align:right;line-height:1}
+.preis{font-family:var(--display);font-weight:800;font-stretch:112%;font-size:calc(var(--u)*2.6);white-space:nowrap;text-align:right;line-height:1}
 .preis small{font-size:.38em;display:block;font-weight:700}
 .zahlen{display:grid;grid-template-columns:1fr 1fr;gap:calc(var(--u)*1.2);align-content:start}
 .zahl{border-top:4px solid var(--tinte);padding-top:.5em}
-.zahl .disp{font-size:calc(var(--u)*2.8)}
-.zahl p{font-size:calc(var(--u)*1.3)}
+.zahl .disp{font-size:calc(var(--u)*2.3)}
+.zahl p{font-size:calc(var(--u)*1.18)}
 .zahl.rot{border-color:var(--signal)}
 .ausblick{grid-column:1/-1;background:var(--tinte);color:var(--putz);padding:calc(var(--u)*1.6) calc(var(--u)*2);box-shadow:7px 7px 0 var(--zoll);margin-top:calc(var(--u)*.6)}
 .ausblick .disp{font-size:calc(var(--u)*2.1);color:var(--zoll)}
@@ -100,7 +116,7 @@ ul{list-style:none}
 
 @media (max-width:820px){
   :root{--u:2.6vw}
-  html{scroll-snap-type:none}
+
   .folie{min-height:auto;padding:12vw 16px}
   h1{font-size:9vw}
   p,li{font-size:15px}
@@ -111,6 +127,8 @@ ul{list-style:none}
   .feld li{font-size:14px}
   .usp{grid-template-columns:1fr 1fr}.usp .label{grid-column:1/-1;padding:.4em .6em}
   .usp span{font-size:13px}
+  .muster,.dreieck{grid-template-columns:1fr 1fr}.muster .label,.dreieck .label{grid-column:1/-1}
+  .muster span,.dreieck span{font-size:13px}
   .nav{display:none}
 }
 @media (prefers-reduced-motion:reduce){
@@ -176,12 +194,29 @@ ul{list-style:none}
     <div><b>Günstiger, nicht billig</b><span>20–30 % unter Markt, trotzdem gute Marge.</span></div>
     <div><b>Wir bleiben</b><span>Miete statt Projekt, dauerhafte Betreuung.</span></div>
   </div>
+  <div class="muster rv" style="--d:.65s">
+    <div class="label">Muster aus dem St. Galler Business Model Navigator <small>(55 Muster)</small></div>
+    <div><b>Subscription</b><span>Monatliche Service-Pauschale</span></div>
+    <div><b>Rent instead of Buy</b><span>Software mieten statt kaufen</span></div>
+    <div><b>Solution Provider</b><span>Bauen, hosten, betreuen aus einer Hand</span></div>
+    <div><b>Lock-in</b><span>Abläufe laufen im System, guter Service hält</span></div>
+  </div>
 </section>
 
 <!-- ===== Folie 3: Erlösmodell ===== -->
 <section class="folie" id="f3" aria-label="Folie 3: Erlösmodell">
   <div class="kopf"><span class="nr">3 / 3</span><span class="titel">Erlösmodell</span><span class="rechts">Preise netto · Annahmen, nicht validiert</span></div>
   <h2 class="rv">Miete statt Projekt. 20–30 % unter Marktpreis.</h2>
+  <div class="dreieck rv" style="--d:.05s">
+    <div class="label">
+      <svg viewBox="0 0 60 52" aria-hidden="true"><path d="M30 4 L56 48 L4 48 Z" fill="none" stroke="#141518" stroke-width="3"/><circle cx="30" cy="4" r="4.5" fill="#141518"/><circle cx="4" cy="48" r="4.5" fill="#141518"/><circle cx="56" cy="48" r="5.5" fill="#D62718" stroke="#141518" stroke-width="1.5"/><circle cx="30" cy="33" r="5" fill="#F4C21B" stroke="#141518" stroke-width="2"/></svg>
+      <span>St. Galler<br>Magisches Dreieck</span>
+    </div>
+    <div><b>Wer?</b><span>Handwerksbetriebe in OWL, dann Kleinbetriebe</span></div>
+    <div><b>Was?</b><span>Website &amp; CRM zur Miete, fertig betreut</span></div>
+    <div><b>Wie?</b><span>Vertrieb vor Ort, KI-Entwicklung, Cloudflare</span></div>
+    <div class="wert"><b>Wert?</b><span>Miete + Einrichtung + Workshops</span></div>
+  </div>
   <div class="erloes">
     <div class="preise">
       <div class="paket rv" style="--d:.1s"><div><h3>Website</h3><p>Mobil, Kontaktformular, Google-Profil. Oder One-Pager kaufen: 590 € + 39 €/Monat.</p><p class="markt">Markt: ~129 €/Monat + 490 €</p></div><div class="preis">99 €<small>/Monat · 290 € Einrichtung</small></div></div>
@@ -245,8 +280,9 @@ ul{list-style:none}
   document.getElementById('weiter').onclick = () => geh(cur + 1);
   document.getElementById('zurueck').onclick = () => geh(cur - 1);
   addEventListener('keydown', e => {
-    if (['ArrowRight', 'ArrowDown', 'PageDown', ' '].includes(e.key)) { e.preventDefault(); geh(cur + 1); }
-    else if (['ArrowLeft', 'ArrowUp', 'PageUp'].includes(e.key)) { e.preventDefault(); geh(cur - 1); }
+    // Nur ← → springen zur nächsten Folie; Scrollen, Leertaste und ↑ ↓ bleiben normal
+    if (e.key === 'ArrowRight') { e.preventDefault(); geh(cur + 1); }
+    else if (e.key === 'ArrowLeft') { e.preventDefault(); geh(cur - 1); }
     else if (e.key.toLowerCase() === 'f') document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen?.();
   });
   pruefen(); setTimeout(pruefen, 300);
