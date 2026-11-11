@@ -356,6 +356,9 @@ kbd{font-family:var(--mono);border:1px solid currentColor;border-radius:3px;padd
 /* ---------- Finale: Geldregen + morphender Blob ---------- */
 .finale{overflow:hidden;align-items:center;text-align:center;isolation:isolate}
 .finale-inhalt{position:relative;z-index:3;width:100%;display:flex;flex-direction:column;align-items:center;gap:calc(var(--u)*1.6)}
+.nach-oben{margin-top:calc(var(--u)*1);display:inline-block;background:var(--zoll);color:var(--tinte);border:3px solid var(--tinte);box-shadow:6px 6px 0 #000;
+  font-family:var(--display);font-weight:900;font-stretch:112%;text-transform:uppercase;font-size:calc(var(--u)*1.7);padding:.55em 1.1em;text-decoration:none;transition:background .2s,color .2s}
+.nach-oben:hover,.nach-oben:focus-visible{background:#fff}
 .szene{width:100%;max-height:72vh;height:auto;overflow:visible}
 .szene .name-figur{font-family:var(--mono);font-size:18px;fill:#9aa2ad;text-transform:uppercase;letter-spacing:.1em}
 .szene .schein-text{font-family:var(--display);font-weight:900;font-size:26px;fill:var(--tinte)}
@@ -680,6 +683,7 @@ kbd{font-family:var(--mono);border:1px solid currentColor;border-radius:3px;padd
     </svg>
     <span class="chips hell"><span>Julian</span><span>Niels</span><span>Sandro</span></span>
     <p class="klein">Fiktives Uniprojekt · Modul Digitale Business Modelle</p>
+    <a class="nach-oben" href="#start">↑ Zurück zur Startseite</a>
   </div>
 </section>
 
